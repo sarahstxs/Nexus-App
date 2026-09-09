@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e9d8a6"
+    android:backgroundTint="#e9d8a6"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="64dp"
+        android:background="#9b2226"
+        android:rotation="30"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="132dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="-30dp"
+        android:background="#9b2226"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="250dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="65dp"
+        android:background="#bb3e03"
+        android:rotation="30"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="-30dp"
+        android:background="#bb3e03"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="155dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="72dp"
+        android:background="#ca6702"
+        android:rotation="30"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="-20dp"
+        android:background="#ca6702"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:background="#ee9b00"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="156dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Login"
+        android:textAlignment="viewStart"
+        android:textColor="#141313"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="76dp"
+        android:background="#ee9b00"
+        android:rotation="30"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:background="#00C92323"
+        android:stateListAnimator="@null"
+        android:text="I already have an account."
+        android:textColor="#005f73"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="245dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Invalid credentials"
+        android:textColor="#9B2226"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- BOTÃO DE LOGIN -->
+    <FrameLayout
+        android:id="@+id/btnEntrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 1. Sombra Dura do Botão (Deslocada para baixo) -->
+        <View
+            android:layout_width="365dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="505dp"
+            android:background="@drawable/background_botao" />
+
+        <!-- 2. TextView estilizado como Botão -->
+        <TextView
+            android:layout_width="317dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="500dp"
+            android:background="@drawable/back_bottom"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="Log In"
+            android:textColor="#001219"
+            android:textSize="16sp" />
+
+
+    </FrameLayout>
+
+
+    <!-- CAMPO 1: Username / E-mail -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="365dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="305dp"
+            android:background="@drawable/sombra_dura" />
+
+        <EditText
+            android:id="@+id/tvMeuTexto"
+            android:layout_width="317dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="300dp"
+            android:background="@drawable/borda_edittext"
+            android:gravity="center_vertical"
+            android:hint="Username or e-mail"
+            android:inputType="text"
+            android:textColor="#001219" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="210dp"
+            android:text="Login with your e-mail or username" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="275dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="E-mail or username" />
+
+    </FrameLayout>
+
+
+    <!-- CAMPO 2: Password -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="365dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/sombra_dura" />
+
+        <EditText
+            android:id="@+id/tvMeuTexto3"
+            android:layout_width="317dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="395dp"
+            android:autofillHints="password"
+            android:background="@drawable/borda_edittext"
+            android:gravity="center_vertical"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#001219" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="370dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Password" />
+
+    </FrameLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

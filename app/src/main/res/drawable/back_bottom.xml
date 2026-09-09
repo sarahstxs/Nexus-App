@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Cor de fundo interna do EditText -->
+    <solid android:color="#ee9b00" />
+
+    <!-- Espessura e cor da borda -->
+    <stroke
+        android:width="2dp"
+        android:color="#001219" />
+
+    <!-- Espaçamento interno (padding) para o texto não colar na borda -->
+    <padding
+        android:left="12dp"
+        android:top="12dp"
+        android:right="12dp"
+        android:bottom="12dp" />
+
+</shape>
