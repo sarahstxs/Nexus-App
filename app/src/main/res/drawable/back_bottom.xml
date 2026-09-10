@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Cor de fundo interna do EditText -->
-    <solid android:color="#ee9b00" />
+    <solid android:color="#005f73" />
 
     <!-- Espessura e cor da borda -->
     <stroke

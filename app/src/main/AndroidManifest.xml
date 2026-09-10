@@ -2,27 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 1. O TEMA REAL DO APP VAI AQUI NA APPLICATION -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NexusAppXML">
+        android:theme="@style/Theme.NexusAppXml"
+        tools:targetApi="31">
+
+        <!-- 2. O TEMA DA SPLASH SCREEN VAI SÓ NA MAIN ACTIVITY -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-    </application>
 
+        <!-- 3. A SUA SEGUNDA TELA FICA NORMAL (ela vai herdar o tema certo agora) -->
+        <activity android:name=".ui.activity.RegisterActivity2" />
+
+    </application>
 </manifest>
