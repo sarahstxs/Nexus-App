@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.nexusappxml.R
+import com.example.nexusappxml.data.network.RetrofitClient
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class RegisterActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,17 +17,13 @@ class RegisterActivity2 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register2)
 
-        val botao = findViewById<Button>(R.id.buttonLogin)
+        // Botão para a tela de login
+        val goToLogin = findViewById<Button>(R.id.btnGoToLogin)
+        goToLogin.setOnClickListener { GotoLogin() }
+    }
 
-        // 2. Avisa o que deve acontecer quando ele for clicado
-        botao.setOnClickListener {
-
-            // 3. Cria a "Intenção" de sair desta tela (this) e ir para a SegundaActivity
-            val intent = Intent(this, MainActivity::class.java)
-
-            // 4. Dá a largada!
-            startActivity(intent)
-
-        }
+    fun GotoLogin() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

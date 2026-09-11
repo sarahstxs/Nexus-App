@@ -119,7 +119,7 @@
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btnGoToLogin"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,6 +158,7 @@
 
         <!-- 2. TextView estilizado como Botão -->
         <TextView
+            android:id="@+id/errado"
             android:layout_width="317dp"
             android:layout_height="50dp"
             android:layout_marginTop="570dp"

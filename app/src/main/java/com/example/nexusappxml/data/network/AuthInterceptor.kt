@@ -1,0 +1,23 @@
+package com.example.nexusappxml.data.network
+
+import android.content.Context
+import com.example.nexusappxml.data.local.TokenManager
+import okhttp3.Interceptor
+import okhttp3.Response
+
+class AuthInterceptor(private val context: Context) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val originalRequest = chain.request()
+        val token = TokenManager.getToken(context)
+
+        val requestWithAuth = if (!token.isNullOrEmpty()) {
+            originalRequest.newBuilder()
+                .header("Authorization", "Bearer $token")
+                .build()
+        } else {
+            originalRequest
+        }
+
+        return chain.proceed(requestWithAuth)
+    }
+}
