@@ -1,7 +1,10 @@
 package com.example.nexusappxml.data.network
 
 import com.example.nexusappxml.data.model.LoginRequest
+import com.example.nexusappxml.data.model.RegisterRequest
+import com.example.nexusappxml.data.model.RegisterResponse
 import com.google.gson.annotations.SerializedName
+import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -18,4 +21,9 @@ interface ApiService {
     suspend fun login(
         @Body request: LoginRequest
     ): TokenResponse
+
+    @POST("/users/")
+    suspend fun registerUser(
+        @Body request: RegisterRequest
+    ): Response<RegisterResponse>
 }

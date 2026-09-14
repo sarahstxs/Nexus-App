@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Cor de fundo interna do EditText -->
-    <solid android:color="#005f73" />
+    <!-- Estado quando o botão ESTÁ SENDO PRESSIONADO -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#0a9396" /> <!-- Cor mais clara para o toque -->
+            <stroke android:width="2dp" android:color="#001219" />
+            <padding
+                android:left="12dp"
+                android:top="12dp"
+                android:right="12dp"
+                android:bottom="12dp" />
+        </shape>
+    </item>
 
-    <!-- Espessura e cor da borda -->
-    <stroke
-        android:width="2dp"
-        android:color="#001219" />
+    <!-- Estado NORMAL (padrão) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#005f73" /> <!-- Cor normal -->
+            <stroke android:width="2dp" android:color="#001219" />
+            <padding
+                android:left="12dp"
+                android:top="12dp"
+                android:right="12dp"
+                android:bottom="12dp" />
+        </shape>
+    </item>
 
-    <!-- Espaçamento interno (padding) para o texto não colar na borda -->
-    <padding
-        android:left="12dp"
-        android:top="12dp"
-        android:right="12dp"
-        android:bottom="12dp" />
-
-</shape>
+</selector>

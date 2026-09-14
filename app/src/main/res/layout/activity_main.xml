@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="#e9d8a6"
     android:backgroundTint="#e9d8a6"
-    tools:context=".ui.activity.MainActivity"
-    android:fitsSystemWindows="true">
+    tools:context=".ui.activity.MainActivity">
+<!--    android:fitsSystemWindows="true"-->
 
     <View
         android:id="@+id/divider14"
@@ -269,7 +269,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Invalid credentials"
+        android:text=""
         android:textColor="#9B2226"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

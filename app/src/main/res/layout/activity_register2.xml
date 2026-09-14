@@ -138,7 +138,6 @@
 
     <!-- BOTÃO DE LOGIN -->
     <FrameLayout
-        android:id="@+id/btnEnter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -158,14 +157,14 @@
 
         <!-- 2. TextView estilizado como Botão -->
         <TextView
-            android:id="@+id/errado"
+            android:id="@+id/btnRegister"
             android:layout_width="317dp"
             android:layout_height="50dp"
             android:layout_marginTop="570dp"
             android:background="@drawable/back_bottom"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
-            android:text="Log In"
+            android:text="Register"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
@@ -190,7 +189,7 @@
             android:background="@drawable/sombra_dura" />
 
         <EditText
-            android:id="@+id/tvMeuTexto"
+            android:id="@+id/formEmail"
             android:layout_width="317dp"
             android:layout_height="50dp"
             android:layout_marginTop="300dp"
@@ -209,7 +208,7 @@
             android:text="Enter your details to create a Nexus account." />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -237,7 +236,7 @@
             android:background="@drawable/sombra_dura" />
 
         <EditText
-            android:id="@+id/tvMeuTexto3"
+            android:id="@+id/formPassword"
             android:layout_width="317dp"
             android:layout_height="50dp"
             android:layout_marginTop="395dp"
@@ -249,7 +248,7 @@
             android:textColor="#001219" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -276,7 +275,7 @@
             android:background="@drawable/sombra_dura" />
 
         <EditText
-            android:id="@+id/tvMeuTexto4"
+            android:id="@+id/formUsername"
             android:layout_width="317dp"
             android:layout_height="50dp"
             android:layout_marginTop="490dp"
@@ -284,7 +283,7 @@
             android:background="@drawable/borda_edittext"
             android:gravity="center_vertical"
             android:hint="Username"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:textColor="#001219" />
 
         <TextView
@@ -299,12 +298,11 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txtErrorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Username already exists"
         android:textColor="#9B2226"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
