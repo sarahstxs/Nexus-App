@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.Initial"
+            android:name=".ui.activity.InitialActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

@@ -1,22 +1,27 @@
 package com.example.nexusappxml.ui.activity
 
+//import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
+import com.example.nexusappxml.ui.view.CustomNavBarView
 
 
-class Initial : AppCompatActivity() {
+class InitialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_initial)
+
+        val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
+
+
+        // Avisa a barra que o usuário está na tela de battle
+        navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
 
         // Botão de voltar
         val formUsernameEmail = findViewById<Button>(R.id.exit)
@@ -24,7 +29,7 @@ class Initial : AppCompatActivity() {
 
         }
     fun backToLogin() {
-        TokenManager.clearToken(this@Initial)
+        TokenManager.clearToken(this@InitialActivity)
 
         val intent = Intent(this, MainActivity::class.java)
 

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
         fun GotoInitialPage() {
-            val intent = Intent(this, Initial::class.java)
+            val intent = Intent(this, InitialActivity::class.java)
 
             // Limpa o histórico de telas. O usuário não consegue voltar para o Login apertando "Voltar"
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
