@@ -4,48 +4,37 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_perfil_icon"
-    android:paddingBottom="5dp"
-    android:paddingRight="5dp"
-    >
+    android:paddingBottom="3dp"
+    android:paddingRight="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
         android:background="@drawable/other_button">
 
         <TextView
-            android:id="@+id/txtUsername"
+            android:id="@+id/txtCoins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:text="30000"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:textColor="#ee9b00"
             android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/perfil_icon"
-            android:tint="#ee9b00"/>
+            app:srcCompat="@drawable/coin_icon"
+            app:tint="#ee9b00" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

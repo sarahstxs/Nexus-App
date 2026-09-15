@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
+import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
@@ -26,6 +27,10 @@ class InitialActivity : AppCompatActivity() {
 
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
 
+        val coinsView = findViewById<CoinView>(R.id.coin_view)
+
+        // Chame a função passando o ID do usuário logado
+        coinsView.loadCoins(userIdReal)
 
         // Avisa a barra que o usuário está na tela de battle
         navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)

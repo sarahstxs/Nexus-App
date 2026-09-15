@@ -6,11 +6,6 @@
         <shape android:shape="rectangle">
             <solid android:color="#c24044" /> <!-- Cor mais clara para o toque -->
             <stroke android:width="2dp" android:color="#001219" />
-            <padding
-                android:left="12dp"
-                android:top="12dp"
-                android:right="12dp"
-                android:bottom="12dp" />
         </shape>
     </item>
 
@@ -19,11 +14,6 @@
         <shape android:shape="rectangle">
             <solid android:color="#9b2226" /> <!-- Cor normal -->
             <stroke android:width="2dp" android:color="#001219" />
-            <padding
-                android:left="12dp"
-                android:top="12dp"
-                android:right="12dp"
-                android:bottom="12dp" />
         </shape>
     </item>
 
