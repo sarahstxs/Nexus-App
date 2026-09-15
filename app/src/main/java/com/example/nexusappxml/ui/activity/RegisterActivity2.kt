@@ -29,11 +29,6 @@ class RegisterActivity2 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register2)
 
-        // Erro
-//        txtError = txtError.text.toString()
-
-
-
         // Botão para a tela de login
         val goToLogin = findViewById<Button>(R.id.btnGoToLogin)
         goToLogin.setOnClickListener { GotoLogin() }

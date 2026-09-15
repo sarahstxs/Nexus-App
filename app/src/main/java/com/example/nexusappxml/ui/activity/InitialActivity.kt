@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
 import com.example.nexusappxml.ui.view.CustomNavBarView
+import com.example.nexusappxml.ui.view.PerfilPreviewView
 
 
 class InitialActivity : AppCompatActivity() {
@@ -16,6 +17,12 @@ class InitialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_initial)
+
+        val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
+
+        val userIdReal = TokenManager.getUserId(this)
+        // Chame a função passando o ID do usuário logado
+        perfilPreview.loadDatas(userIdReal)
 
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
 

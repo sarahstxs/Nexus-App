@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Estado quando o botão ESTÁ SENDO PRESSIONADO -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#c24044" /> <!-- Cor mais clara para o toque -->
+            <stroke android:width="2dp" android:color="#001219" />
+            <padding
+                android:left="12dp"
+                android:top="12dp"
+                android:right="12dp"
+                android:bottom="12dp" />
+        </shape>
+    </item>
+
+    <!-- Estado NORMAL (padrão) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#9b2226" /> <!-- Cor normal -->
+            <stroke android:width="2dp" android:color="#001219" />
+            <padding
+                android:left="12dp"
+                android:top="12dp"
+                android:right="12dp"
+                android:bottom="12dp" />
+        </shape>
+    </item>
+
+</selector>

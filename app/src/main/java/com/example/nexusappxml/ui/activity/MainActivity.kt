@@ -2,6 +2,7 @@ package com.example.nexusappxml.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,62 +13,59 @@ import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
 import com.example.nexusappxml.data.model.LoginRequest
 import com.example.nexusappxml.data.network.RetrofitClient
+import com.example.nexusappxml.ui.view.PerfilPreviewView
 import kotlinx.coroutines.launch
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Verifica se já tem um token salvo antes de carregar a tela
         val tokenSaved = TokenManager.getToken(this)
 
-        // Se o token existe
+        // Se o token existe, vai direto pra home
         if (!tokenSaved.isNullOrEmpty()) {
             GotoInitialPage()
             return
         }
 
-        // Se não tem token
+        // Se não tem token, carrega a tela de login
         setContentView(R.layout.activity_main)
 
         // Botão para tela de registro
         val goToRegister = findViewById<Button>(R.id.buttonResgister)
-        goToRegister.setOnClickListener {GotoRegister()}
+        goToRegister.setOnClickListener { GotoRegister() }
 
         // Botão para logar
         val btnLogin = findViewById<TextView>(R.id.btnLogin)
-        btnLogin.setOnClickListener {Enter()}
-
-
+        btnLogin.setOnClickListener { Enter() }
     }
     fun GotoRegister(){
         val intent = Intent(this, RegisterActivity2::class.java)
         startActivity(intent)
 
     }
-
     fun Enter() {
-        // Instancia o Retrofit passando o contexto da Activity (this)
         val apiService = RetrofitClient.getInstance(this)
         val txtErrorMessage = findViewById<TextView>(R.id.txtErrorMessage)
 
-        // Chamadas de rede precisam rodar dentro de uma Coroutine no escopo da Activity
         lifecycleScope.launch {
             try {
                 val formEmail = findViewById<EditText>(R.id.formEmail)
                 val formPassword = findViewById<EditText>(R.id.formPassword)
 
-                val txtEmail = formEmail.text.toString()
-                val txtPassword = formPassword.text.toString()
-                // Dados do schema de login
                 val loginDetails = LoginRequest(
-                    email = txtEmail,
-                    password = txtPassword
+                    email = formEmail.text.toString(),
+                    password = formPassword.text.toString()
                 )
 
-                // Faz a chamada POST enviando o objeto no corpo (body)
                 val awser = apiService.login(loginDetails)
 
-                // Salva o token usando 'this' (a Activity) como contexto
+                // Salva o token
                 TokenManager.saveToken(this@MainActivity, awser.accessToken)
+
+                // Salva o ID corretamente
+                TokenManager.saveUserId(this@MainActivity, awser.userId)
 
                 GotoInitialPage()
 
@@ -75,19 +73,20 @@ class MainActivity : AppCompatActivity() {
                 txtErrorMessage.text = "incorrect credentials"
                 txtErrorMessage.visibility = View.VISIBLE
             } catch (e: Exception) {
+                Log.d("API_REGISTER", "$e")
                 txtErrorMessage.text = "Connection error"
                 txtErrorMessage.visibility = View.VISIBLE
             }
         }
     }
-        fun GotoInitialPage() {
-            val intent = Intent(this, InitialActivity::class.java)
+    fun GotoInitialPage() {
+        val intent = Intent(this, InitialActivity::class.java)
 
-            // Limpa o histórico de telas. O usuário não consegue voltar para o Login apertando "Voltar"
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        // Limpa o histórico de telas. O usuário não consegue voltar para o Login apertando "Voltar"
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-            startActivity(intent)
-            finish()
-        }
+        startActivity(intent)
+        finish()
+    }
 
 }
