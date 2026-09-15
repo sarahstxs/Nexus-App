@@ -4,7 +4,7 @@
     <!-- Estado quando o botão ESTÁ SENDO PRESSIONADO -->
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#0a9396" /> <!-- Cor mais clara para o toque -->
+            <solid android:color="#c24044" /> <!-- Cor mais clara para o toque -->
             <stroke android:width="2dp" android:color="#001219" />
             <padding
                 android:left="12dp"
@@ -17,7 +17,7 @@
     <!-- Estado NORMAL (padrão) -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#005f73" /> <!-- Cor normal -->
+            <solid android:color="#9b2226" /> <!-- Cor normal -->
             <stroke android:width="2dp" android:color="#001219" />
             <padding
                 android:left="12dp"
