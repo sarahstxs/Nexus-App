@@ -106,11 +106,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="156dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/bebasbeue_regular"
         android:text="Login"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
-        android:textSize="50sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +140,7 @@
         android:textColor="#ee9b00"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:fontFamily="@font/bebasbeue_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -173,7 +174,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="500dp"
             android:background="@drawable/back_bottom"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/bebasbeue_regular"
             android:gravity="center"
             android:clickable="true"
             android:text="Log In"
@@ -218,6 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="210dp"
+            android:fontFamily="@font/bebasbeue_regular"
             android:text="Login with your e-mail and password"
             android:textColor="#FFFFFF" />
 
@@ -227,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="275dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/bebasbeue_regular"
             android:text="E-mail"
             android:textColor="#FFF"/>
 
@@ -269,7 +271,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="370dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/bebasbeue_regular"
             android:text="Password"
             android:textColor="#FFFFFF" />
 
