@@ -11,18 +11,70 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnGoDeck"
         android:layout_width="200dp"
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:background="@drawable/other_button">
 
-        <FrameLayout
+        <View
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="13dp"
+            android:background="#005f73"
+            android:rotation="-45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="-33dp"
+            android:layout_marginBottom="27dp"
+            android:background="#005f73"
+            android:rotation="-45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="-20dp"
+            android:background="#ee9b00"
+            android:rotation="-45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="27dp"
+            android:background="#ee9b00"
+            android:rotation="-45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="-20dp"
+            android:background="#ee9b00"
+            android:rotation="-45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgHero"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:background="#009688"
+            android:background="#000000"
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="20dp">
 
-        </FrameLayout>
+        </ImageView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

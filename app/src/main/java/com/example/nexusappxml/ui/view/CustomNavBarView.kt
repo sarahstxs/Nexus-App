@@ -4,9 +4,12 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.nexusappxml.R
+import android.content.res.ColorStateList
+
 
 class CustomNavBarView @JvmOverloads constructor(
     context: Context,
@@ -23,21 +26,48 @@ class CustomNavBarView @JvmOverloads constructor(
         WHO
     }
 
+    private val btnBuyContainer: LinearLayout?
+    private val btnCollectionContainer: LinearLayout?
+    private val btnBattleContainer: LinearLayout?
+    private val btnPodiumContainer: LinearLayout?
+    private val btnWhoContainer: LinearLayout?
     private val btnBattle: TextView?
     private val btnCollection: TextView?
     private val btnBuy: TextView?
     private val btnPodium: TextView?
     private val btnWho: TextView?
 
+    private val iconBuy: ImageView?
+    private val iconCollection: ImageView?
+    private val iconBattle: ImageView?
+    private val iconPodium: ImageView?
+
+    var onAbaSelectedListener: ((Aba) -> Unit)? = null
+
     init {
         LayoutInflater.from(context).inflate(R.layout.view_custom_nav_bar, this, true)
 
         // Mapeando os elementos do XML
-        btnBattle = findViewById(R.id.btn_battle)
-        btnCollection = findViewById(R.id.btn_collection)
         btnBuy = findViewById(R.id.btn_buy)
+        btnBuyContainer = findViewById(R.id.btn_buy_container)
+        iconBuy = findViewById(R.id.icon_buy)
+
+        btnCollection = findViewById(R.id.btn_collection)
+        btnCollectionContainer = findViewById(R.id.btn_collection_container)
+        iconCollection = findViewById(R.id.icon_collection)
+
+        btnBattle = findViewById(R.id.btn_battle)
+        btnBattleContainer = findViewById(R.id.btn_battle_container)
+        iconBattle = findViewById(R.id.icon_battle)
+
+
+
         btnPodium = findViewById(R.id.btn_podium)
+        btnPodiumContainer = findViewById(R.id.btn_podium_container)
+        iconPodium = findViewById(R.id.icon_podium)
+
         btnWho = findViewById(R.id.btn_who)
+        btnWhoContainer = findViewById(R.id.btn_who_container)
     }
 
     fun setAbaAtiva(abaAtual: Aba) {
@@ -51,13 +81,57 @@ class CustomNavBarView @JvmOverloads constructor(
         btnPodium?.setTextColor(inactiveColor)
         btnWho?.setTextColor(inactiveColor)
 
+        btnBuyContainer?.setOnClickListener {
+            // Invoca o listener passando a aba correspondente
+            onAbaSelectedListener?.invoke(Aba.BUY)
+        }
+        btnCollectionContainer?.setOnClickListener {
+            // Invoca o listener passando a aba correspondente
+            onAbaSelectedListener?.invoke(Aba.COLLECTION)
+        }
+        btnBattleContainer?.setOnClickListener {
+            // Invoca o listener passando a aba correspondente
+            onAbaSelectedListener?.invoke(Aba.BATTLE)
+        }
+        btnPodiumContainer?.setOnClickListener {
+            // Invoca o listener passando a aba correspondente
+            onAbaSelectedListener?.invoke(Aba.PODIUM)
+        }
+        btnWhoContainer?.setOnClickListener {
+            // Invoca o listener passando a aba correspondente
+            onAbaSelectedListener?.invoke(Aba.WHO)
+        }
+
         // Destaca apenas a aba atual
         val activeColor = Color.parseColor("#ee9b00")
 
         when (abaAtual) {
-            Aba.BATTLE -> btnBattle?.setTextColor(activeColor)
+            Aba.BATTLE -> {
+                btnBattle?.setTextColor(activeColor)
+                iconBattle?.imageTintList = ColorStateList.valueOf(activeColor)
+
+                btnCollection?.setTextColor(inactiveColor)
+                btnBuy?.setTextColor(inactiveColor)
+                btnPodium?.setTextColor(inactiveColor)
+                btnWho?.setTextColor(inactiveColor)
+
+                iconBuy?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconCollection?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
+            }
             Aba.BUY -> btnBuy?.setTextColor(activeColor)
-            Aba.COLLECTION -> btnCollection?.setTextColor(activeColor)
+            Aba.COLLECTION -> {btnCollection?.setTextColor(activeColor)
+                iconCollection?.imageTintList = ColorStateList.valueOf(activeColor)
+
+                btnBattle?.setTextColor(inactiveColor)
+                btnBuy?.setTextColor(inactiveColor)
+                btnPodium?.setTextColor(inactiveColor)
+                btnWho?.setTextColor(inactiveColor)
+
+                iconBuy?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                }
             Aba.PODIUM -> btnPodium?.setTextColor(activeColor)
             Aba.WHO -> btnWho?.setTextColor(activeColor)
         }

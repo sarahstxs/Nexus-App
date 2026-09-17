@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
 import com.example.nexusappxml.data.model.LoginRequest
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         // Verifica se já tem um token salvo antes de carregar a tela
         val tokenSaved = TokenManager.getToken(this)
 
+
+
         // Se o token existe, vai direto pra home
         if (!tokenSaved.isNullOrEmpty()) {
             GotoInitialPage()
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         // Se não tem token, carrega a tela de login
         setContentView(R.layout.activity_main)
+
 
         // Botão para tela de registro
         val goToRegister = findViewById<Button>(R.id.buttonResgister)

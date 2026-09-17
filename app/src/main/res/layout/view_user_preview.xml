@@ -13,6 +13,15 @@
         android:layout_height="60dp"
         android:background="@drawable/other_button">
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginEnd="33dp"
+            android:background="#005f73"
+            android:rotation="45"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/txtUsername"
             android:layout_width="wrap_content"
@@ -45,7 +54,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/perfil_icon"
-            android:tint="#ee9b00"/>
+            app:tint="#ee9b00" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="180dp"
+            android:layout_marginEnd="30dp"
+            android:background="#ee9b00"
+            android:rotation="45"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

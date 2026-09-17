@@ -8,6 +8,16 @@
     android:background="#e9d8a6"
     tools:context=".ui.activity.InitialActivity">
 
+<!--    <ImageView-->
+<!--        android:id="@+id/imgBackground"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_margin="0dp"-->
+<!--        android:background="#000000"-->
+<!--        tools:layout_editor_absoluteX="20dp"-->
+<!--        tools:layout_editor_absoluteY="20dp"/>-->
+
+
     <Button
         android:id="@+id/exit"
         android:layout_width="70dp"
@@ -72,11 +82,40 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="Level 7"
+        android:layout_marginTop="120dp"
+        android:text="Level 37"
         android:textColor="#ee9b00"
         android:textSize="48sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="180dp"
+        android:background="#ee9b00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="110dp"
+        android:background="#9b2226"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="180dp"
+        android:background="#005f73"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

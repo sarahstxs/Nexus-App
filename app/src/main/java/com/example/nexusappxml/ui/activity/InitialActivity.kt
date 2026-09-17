@@ -1,9 +1,10 @@
 package com.example.nexusappxml.ui.activity
 
-//import android.R
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nexusappxml.R
@@ -14,8 +15,8 @@ import com.example.nexusappxml.ui.view.DeckPreviewView
 import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
-
 class InitialActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,16 +28,43 @@ class InitialActivity : AppCompatActivity() {
         val btnGoBattle = findViewById<GoBattleButton>(R.id.btn_go_battle)
         val btnGoDeckPage = findViewById<DeckPreviewView>(R.id.btn_go_deck)
 
-
         val userIdReal = TokenManager.getUserId(this)
-        // Chame a função passando o ID do usuário logado
-        perfilPreview.loadDatas(userIdReal)
 
-        // Chame a função passando o ID do usuário logado
+        // Carrega dados do perfil e moedas
+        perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
 
-        // Avisa a barra que o usuário está na tela de battle
+        // Avisa a barra que o usuário está na tela de battle (ou inicial)
         navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
+
+        // Configura a ação de clique vinda da barra de navegação
+        navBar.onAbaSelectedListener = { aba ->
+            when (aba) {
+                CustomNavBarView.Aba.COLLECTION -> {
+                    Log.d("RETURN", "Collection button")
+                    val intent = Intent(this, CollectionActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.BUY -> {
+                    Log.d("RETURN", "Buy button")
+                    val intent = Intent(this, BuyActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.PODIUM -> {
+                    Log.d("RETURN", "Podium button")
+                    val intent = Intent(this, PodiumActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.WHO -> {
+                    Log.d("RETURN", "Who button")
+                    Toast.makeText(this@InitialActivity, "Coming soon", Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        } // <--- Chave do lambda fechada corretamente aqui
 
         // Adiciona o botão para batalhar
         btnGoBattle.GotoBattle()
@@ -44,19 +72,18 @@ class InitialActivity : AppCompatActivity() {
         // Adicionar preview do deck
         btnGoDeckPage.GotoDeckPage()
 
-        // Botão de voltar
+        // Botão de sair/voltar para o login
         val formUsernameEmail = findViewById<Button>(R.id.exit)
-        formUsernameEmail.setOnClickListener {backToLogin()}
+        formUsernameEmail.setOnClickListener { backToLogin() }
+    } // <--- Fim do onCreate
 
-        }
     fun backToLogin() {
         TokenManager.clearToken(this@InitialActivity)
 
         val intent = Intent(this, MainActivity::class.java)
-
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         startActivity(intent)
         finish()
     }
-    }
+}

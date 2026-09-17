@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Home"
+            android:text="Buy"
             android:textColor="#FFFF"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -83,7 +83,7 @@
             android:layout_width="35dp"
             android:layout_height="37dp"
             android:src="@drawable/initial_icon"
-            app:tint="#ee9b00"
+            app:tint="#FFF"
             android:layout_marginBottom="15dp"/>
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-20dp"
             android:text="Battle"
-            android:textColor="#ee9b00"
+            android:textColor="#FFF"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -126,7 +126,7 @@
 
     <!-- ABA 5: WHO -->
     <LinearLayout
-        android:id="@+id/btn_who_containerw"
+        android:id="@+id/btn_who_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
