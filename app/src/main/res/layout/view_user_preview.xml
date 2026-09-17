@@ -31,6 +31,7 @@
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:fontFamily="@font/bebasbeue_regular"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,9 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:textColor="#ee9b00"
             android:textSize="16sp"
+            android:fontFamily="@font/bebasbeue_regular"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -8,11 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
+import com.example.nexusappxml.ui.view.AlbumAdapter
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
-import com.example.nexusappxml.ui.view.DeckPreviewView
 import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
@@ -24,6 +26,35 @@ class CollectionActivity : AppCompatActivity() {
 //        val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
 //        val coinsView = findViewById<CoinView>(R.id.coin_view)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewAlbuns)
+
+// Exemplo em Grade (Grid) com 2 colunas
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
+
+// Lista de URLs de exemplo apenas com imagens
+        val minhasImagens = listOf(
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
+            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc"
+        )
+
+        recyclerView.adapter = AlbumAdapter(minhasImagens)
 
         val userIdReal = TokenManager.getUserId(this)
         // Chama a função passando o ID do usuário logado

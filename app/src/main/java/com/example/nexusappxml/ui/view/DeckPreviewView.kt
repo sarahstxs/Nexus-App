@@ -2,34 +2,41 @@ package com.example.nexusappxml.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
+import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
 
-class DeckPreviewView @JvmOverloads constructor(
+class ItemAlbumView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var btnGoDeck: ConstraintLayout
-    private var imgHero: ImageView
+    private val imgHero: ImageView
 
     init {
+        // Infla o seu XML exato (substitua 'view_deck_preview' pelo nome real do seu arquivo XML se for diferente)
         LayoutInflater.from(context).inflate(R.layout.view_deck_preview, this, true)
-        btnGoDeck = findViewById(R.id.btnGoDeck)
-        imgHero = findViewById<ImageView>(R.id.imgHero)
 
-        Glide.with(this)
-            .load("https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg")
-            .into(imgHero)
+        // Ajusta os parâmetros para que o item caiba bem no RecyclerView / Grid
+        layoutParams = MarginLayoutParams(
+            MarginLayoutParams.WRAP_CONTENT,
+            MarginLayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(8, 8, 8, 8)
+        }
+
+        // Encontra o ImageView dentro do seu ConstraintLayout (btnGoDeck)
+        imgHero = findViewById(R.id.imgHero)
     }
 
-    fun GotoDeckPage() {
-        btnGoDeck.setOnClickListener {Log.d("RETURN", "Deck!!!")}
+    // Função para carregar a imagem dinamicamente via Glide
+    fun bind(imageUrl: String) {
+        Glide.with(context)
+            .load(imageUrl)
+            .placeholder(R.drawable.shadow_perfil_icon) // Opcional: imagem de carregamento
+            .into(imgHero)
     }
 }

@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:fontFamily="@font/bebasbeue_regular"
             android:text="Buy"
             android:textColor="#FFFF"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <!-- ABA 2: COLLECTION -->
@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Collection"
+            android:fontFamily="@font/bebasbeue_regular"
             android:textColor="#FFF"
             android:textSize="12sp" />
     </LinearLayout>
@@ -80,18 +81,19 @@
 
         <ImageView
             android:id="@+id/icon_battle"
-            android:layout_width="35dp"
-            android:layout_height="37dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/initial_icon"
             app:tint="#FFF"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="17dp"/>
 
         <TextView
             android:id="@+id/btn_battle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-20dp"
+            android:layout_marginTop="-15dp"
             android:text="Battle"
+            android:fontFamily="@font/bebasbeue_regular"
             android:textColor="#FFF"
             android:textSize="12sp" />
     </LinearLayout>
@@ -120,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Podium"
+            android:fontFamily="@font/bebasbeue_regular"
             android:textColor="#FFFF"
             android:textSize="12sp" />
     </LinearLayout>
@@ -148,6 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Chat"
+            android:fontFamily="@font/bebasbeue_regular"
             android:textColor="#FFFF"
             android:textSize="12sp" />
     </LinearLayout>

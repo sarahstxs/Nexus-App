@@ -16,7 +16,6 @@ import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
-import com.example.nexusappxml.ui.view.DeckPreviewView
 import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
@@ -50,7 +49,7 @@ class InitialActivity : AppCompatActivity() {
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
         val coinsView = findViewById<CoinView>(R.id.coin_view)
         val btnGoBattle = findViewById<GoBattleButton>(R.id.btn_go_battle)
-        val btnGoDeckPage = findViewById<DeckPreviewView>(R.id.btn_go_deck)
+//        val btnGoDeckPage = findViewById<DeckPreviewView>(R.id.btn_go_deck)
 
         val userIdReal = TokenManager.getUserId(this)
 
@@ -105,7 +104,7 @@ class InitialActivity : AppCompatActivity() {
         btnGoBattle.GotoBattle()
 
         // Adicionar preview do deck
-        btnGoDeckPage.GotoDeckPage()
+//        btnGoDeckPage.GotoDeckPage()
 
         // Botão de sair/voltar para o login
         perfilPreview.setOnClickListener { backToLogin() }
