@@ -8,7 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
@@ -36,6 +40,22 @@ class MainActivity : AppCompatActivity() {
         // Se não tem token, carrega a tela de login
         setContentView(R.layout.activity_main)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+
+        // Esconde a barra de navegação
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+
+        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        var imgBackground = findViewById<ImageView>(R.id.imgBackground)
+
+        Glide.with(this)
+            .load("https://i.pinimg.com/736x/a7/2a/02/a72a022f37c47d8d294e85577737f362.jpg")
+            .centerCrop()
+            .into(imgBackground)
+
 
         // Botão para tela de registro
         val goToRegister = findViewById<Button>(R.id.buttonResgister)
@@ -52,7 +72,6 @@ class MainActivity : AppCompatActivity() {
     }
     fun Enter() {
         val apiService = RetrofitClient.getInstance(this)
-        val txtErrorMessage = findViewById<TextView>(R.id.txtErrorMessage)
 
         lifecycleScope.launch {
             try {
@@ -75,12 +94,10 @@ class MainActivity : AppCompatActivity() {
                 GotoInitialPage()
 
             } catch (e: retrofit2.HttpException) {
-                txtErrorMessage.text = "incorrect credentials"
-                txtErrorMessage.visibility = View.VISIBLE
+                Toast.makeText(this@MainActivity, "Incorrect Credentials!", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.d("API_REGISTER", "$e")
-                txtErrorMessage.text = "Connection error"
-                txtErrorMessage.visibility = View.VISIBLE
+                Toast.makeText(this@MainActivity, "Connection Error!", Toast.LENGTH_SHORT).show()
             }
         }
     }

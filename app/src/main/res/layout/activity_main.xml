@@ -10,6 +10,15 @@
     tools:context=".ui.activity.MainActivity">
 <!--    android:fitsSystemWindows="true"-->
 
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:background="#000000"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp"/>
+
     <View
         android:id="@+id/divider14"
         android:layout_width="300dp"
@@ -100,7 +109,7 @@
         android:fontFamily="sans-serif-black"
         android:text="Login"
         android:textAlignment="viewStart"
-        android:textColor="#141313"
+        android:textColor="#FFFFFF"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -128,7 +137,7 @@
         android:background="#00C92323"
         android:stateListAnimator="@null"
         android:text="I don't have an account"
-        android:textColor="#bb3e03"
+        android:textColor="#ee9b00"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -207,9 +216,10 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="210dp"
-            android:text="Login with your e-mail and password" />
+            android:text="Login with your e-mail and password"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/textView4"
@@ -218,7 +228,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="275dp"
             android:fontFamily="sans-serif-medium"
-            android:text="E-mail" />
+            android:text="E-mail"
+            android:textColor="#FFF"/>
 
     </FrameLayout>
 
@@ -228,6 +239,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:foregroundTint="#E4DADA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -249,7 +261,7 @@
             android:gravity="center_vertical"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#001219" />
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/textView6"
@@ -258,22 +270,24 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="370dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Password" />
+            android:text="Password"
+            android:textColor="#FFFFFF" />
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/txtErrorMessage"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
-        android:fontFamily="sans-serif-medium"
-        android:text=""
-        android:textColor="#9B2226"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/txtErrorMessage"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="260dp"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text=""-->
+<!--        android:textColor="#ee9b00"-->
+<!--        android:textSize="27dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
