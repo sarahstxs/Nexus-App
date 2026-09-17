@@ -1,6 +1,9 @@
 package com.example.nexusappxml.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +18,37 @@ class PodiumActivity : AppCompatActivity() {
         setContentView(R.layout.activity_podium)
 
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
+
+        navBar.setAbaAtiva(CustomNavBarView.Aba.PODIUM)
+
+        // Configura a ação de clique vinda da barra de navegação
+        navBar.onAbaSelectedListener = { aba ->
+            when (aba) {
+                CustomNavBarView.Aba.COLLECTION -> {
+                    Log.d("RETURN", "Collection button")
+                    val intent = Intent(this, CollectionActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.BATTLE -> {
+                    Log.d("RETURN", "Battle button")
+                    val intent = Intent(this, InitialActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.BUY -> {
+                    Log.d("RETURN", "Buy button")
+                    val intent = Intent(this, BuyActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.WHO -> {
+                    Log.d("RETURN", "Who button")
+                    Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
 
     }
 }

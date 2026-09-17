@@ -30,9 +30,9 @@ class BuyActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                     startActivity(intent)
                 }
-                CustomNavBarView.Aba.BUY -> {
-                    Log.d("RETURN", "Buy button")
-                    val intent = Intent(this, BuyActivity::class.java)
+                CustomNavBarView.Aba.BATTLE -> {
+                    Log.d("RETURN", "Battle button")
+                    val intent = Intent(this, InitialActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                     startActivity(intent)
                 }
@@ -48,7 +48,7 @@ class BuyActivity : AppCompatActivity() {
                 }
                 else -> {}
             }
-        } // <--- Chave do lambda fechada corretamente aqui
+        }
 
     }
 }

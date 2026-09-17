@@ -119,7 +119,18 @@ class CustomNavBarView @JvmOverloads constructor(
                 iconCollection?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
             }
-            Aba.BUY -> btnBuy?.setTextColor(activeColor)
+            Aba.BUY -> {btnBuy?.setTextColor(activeColor)
+                iconBuy?.imageTintList = ColorStateList.valueOf(activeColor)
+
+                btnBattle?.setTextColor(inactiveColor)
+                btnCollection?.setTextColor(inactiveColor)
+                btnPodium?.setTextColor(inactiveColor)
+                btnWho?.setTextColor(inactiveColor)
+
+                iconCollection?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
+            }
             Aba.COLLECTION -> {btnCollection?.setTextColor(activeColor)
                 iconCollection?.imageTintList = ColorStateList.valueOf(activeColor)
 
@@ -132,7 +143,18 @@ class CustomNavBarView @JvmOverloads constructor(
                 iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 }
-            Aba.PODIUM -> btnPodium?.setTextColor(activeColor)
+            Aba.PODIUM -> {btnPodium?.setTextColor(activeColor)
+                iconPodium?.imageTintList = ColorStateList.valueOf(activeColor)
+
+                btnBattle?.setTextColor(inactiveColor)
+                btnBuy?.setTextColor(inactiveColor)
+                btnCollection?.setTextColor(inactiveColor)
+                btnWho?.setTextColor(inactiveColor)
+
+                iconBuy?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
+                iconCollection?.imageTintList = ColorStateList.valueOf(inactiveColor)
+            }
             Aba.WHO -> btnWho?.setTextColor(activeColor)
         }
     }
