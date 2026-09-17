@@ -42,20 +42,31 @@ class InitialActivity : AppCompatActivity() {
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
                     Log.d("RETURN", "Collection button")
-                    val intent = Intent(this, CollectionActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    val intent = Intent(this, CollectionActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.BUY -> {
                     Log.d("RETURN", "Buy button")
-                    val intent = Intent(this, BuyActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    val intent = Intent(this, BuyActivity::class.java).apply {
+                        // Combina as flags corretamente usando 'or'
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.PODIUM -> {
                     Log.d("RETURN", "Podium button")
-                    val intent = Intent(this, PodiumActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    val intent = Intent(this, PodiumActivity::class.java).apply {
+                        // Combina as flags corretamente usando 'or'
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.WHO -> {
@@ -64,7 +75,7 @@ class InitialActivity : AppCompatActivity() {
                 }
                 else -> {}
             }
-        } // <--- Chave do lambda fechada corretamente aqui
+        }
 
         // Adiciona o botão para batalhar
         btnGoBattle.GotoBattle()
@@ -75,7 +86,7 @@ class InitialActivity : AppCompatActivity() {
         // Botão de sair/voltar para o login
         val formUsernameEmail = findViewById<Button>(R.id.exit)
         formUsernameEmail.setOnClickListener { backToLogin() }
-    } // <--- Fim do onCreate
+    }
 
     fun backToLogin() {
         TokenManager.clearToken(this@InitialActivity)

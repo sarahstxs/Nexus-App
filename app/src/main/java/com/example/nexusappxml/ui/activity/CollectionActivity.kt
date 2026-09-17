@@ -1,6 +1,9 @@
 package com.example.nexusappxml.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,13 +26,52 @@ class CollectionActivity : AppCompatActivity() {
 //        val coinsView = findViewById<CoinView>(R.id.coin_view)
 
         val userIdReal = TokenManager.getUserId(this)
-        // Chame a função passando o ID do usuário logado
+        // Chama a função passando o ID do usuário logado
 //        perfilPreview.loadDatas(userIdReal)
 
-        // Chame a função passando o ID do usuário logado
+        // Chama a função passando o ID do usuário logado
 //        coinsView.loadCoins(userIdReal)
 
         // Avisa a barra que o usuário está na tela de battle
         navBar.setAbaAtiva(CustomNavBarView.Aba.COLLECTION)
+
+        navBar.onAbaSelectedListener = { aba ->
+            when (aba) {
+                CustomNavBarView.Aba.BATTLE -> {
+                    Log.d("RETURN", "Battle button")
+                    val intent = Intent(this, InitialActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.BUY -> {
+                    Log.d("RETURN", "Buy button")
+                    val intent = Intent(this, BuyActivity::class.java).apply {
+                        // Combina as flags corretamente usando 'or'
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.PODIUM -> {
+                    Log.d("RETURN", "Podium button")
+                    val intent = Intent(this, PodiumActivity::class.java).apply {
+                        // Combina as flags corretamente usando 'or'
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    }
+                    startActivity(intent)
+                }
+                CustomNavBarView.Aba.WHO -> {
+                    Log.d("RETURN", "Who button")
+                    Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
     }
 }
