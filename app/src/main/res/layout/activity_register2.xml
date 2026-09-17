@@ -9,6 +9,15 @@
     android:backgroundTint="#e9d8a6"
     tools:context=".ui.activity.RegisterActivity2">
 
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:background="#000000"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp"/>
+
     <View
         android:id="@+id/divider14"
         android:layout_width="300dp"
@@ -94,13 +103,13 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="156dp"
-        android:fontFamily="sans-serif-black"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/bebasbeue_regular"
         android:text="Register"
         android:textAlignment="viewStart"
-        android:textColor="#141313"
-        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +171,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="570dp"
             android:background="@drawable/back_bottom"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/bebasbeue_regular"
             android:gravity="center"
             android:text="Register"
             android:textColor="#FFFFFF"
@@ -203,9 +212,11 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="210dp"
-            android:text="Enter your details to create a Nexus account." />
+            android:fontFamily="@font/bebasbeue_regular"
+            android:text="Enter your details to create a Nexus account."
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/txtEmail"
@@ -213,8 +224,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="275dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="E-mail" />
+            android:fontFamily="@font/bebasbeue_regular"
+            android:text="E-mail"
+            android:textColor="#FFFFFF" />
 
     </FrameLayout>
 
@@ -253,8 +265,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="370dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Password" />
+            android:fontFamily="@font/bebasbeue_regular"
+            android:text="Password"
+            android:textColor="#FFFFFF" />
 
     </FrameLayout>
 
@@ -292,8 +305,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="465dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Username" />
+            android:text="Username"
+            android:fontFamily="@font/bebasbeue_regular"
+            android:textColor="#FFFFFF" />
 
     </FrameLayout>
 
