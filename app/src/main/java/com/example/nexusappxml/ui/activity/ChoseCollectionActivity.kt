@@ -3,70 +3,60 @@ package com.example.nexusappxml.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.core.view.WindowInsetsControllerCompat
+import com.bumptech.glide.Glide
+import com.example.nexusappxml.MyCollectionActivity
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
-import com.example.nexusappxml.ui.view.AlbumAdapter
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
-import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
-class CollectionActivity : AppCompatActivity() {
+class ChoseCollectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_collection)
-//        val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
+        setContentView(R.layout.activity_chose_collection)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+
+        // Esconde a barra de navegação
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+
+        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        var imgBackground = findViewById<ImageView>(R.id.imgBackground)
+
+        Glide.with(this)
+            .load("https://i.pinimg.com/736x/a7/2a/02/a72a022f37c47d8d294e85577737f362.jpg")
+            .centerCrop()
+            .into(imgBackground)
+
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
-        val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
         val coinsView = findViewById<CoinView>(R.id.coin_view)
+        val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
+        val btnMyCollection = findViewById<FrameLayout>(R.id.btnMyCollection)
+        val btnAllHeroes = findViewById<FrameLayout>(R.id.btnAllHeroes)
+        val btnComingSoon = findViewById<FrameLayout>(R.id.btnComingSoon)
 
-
-//        val coinsView = findViewById<CoinView>(R.id.coin_view)
+        btnMyCollection.setOnClickListener { goToMyCollection() }
+        btnAllHeroes.setOnClickListener { goToAllHeroes() }
+        btnComingSoon.setOnClickListener { goToComingSoon() }
 
         val userIdReal = TokenManager.getUserId(this)
 
-        // Carrega dados do perfil e moedas
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewAlbuns)
-
-// Exemplo em Grade (Grid) com 2 colunas
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-
-// Lista de URLs de exemplo apenas com imagens
-        val minhasImagens = listOf(
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-            "https://comicvine.gamespot.com/a/uploads/original/11161/111612243/10012902-5140161970-b364e.jpg",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-            "https://images.unsplash.com/photo-1511285560929-80b456fea0bc"
-        )
-
-        recyclerView.adapter = AlbumAdapter(minhasImagens)
-
-        // Avisa a barra que o usuário está na tela de battle
         navBar.setAbaAtiva(CustomNavBarView.Aba.COLLECTION)
 
         navBar.onAbaSelectedListener = { aba ->
@@ -106,6 +96,30 @@ class CollectionActivity : AppCompatActivity() {
                 }
                 else -> {}
             }
-        }
+    }
+
+
+    }
+    fun goToMyCollection() {
+        TokenManager.clearToken(this)
+
+        val intent = Intent(this, MyCollectionActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+        startActivity(intent)
+        finish()
+    }
+
+    fun goToAllHeroes() {
+        TokenManager.clearToken(this)
+
+        val intent = Intent(this, CollectionActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+        startActivity(intent)
+        finish()
+    }
+    fun goToComingSoon() {
+        Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
     }
 }

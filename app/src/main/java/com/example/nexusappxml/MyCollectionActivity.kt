@@ -1,4 +1,4 @@
-package com.example.nexusappxml.ui.activity
+package com.example.nexusappxml
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,15 +10,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
+import com.example.nexusappxml.ui.activity.BuyActivity
+import com.example.nexusappxml.ui.activity.InitialActivity
+import com.example.nexusappxml.ui.activity.PodiumActivity
 import com.example.nexusappxml.ui.view.AlbumAdapter
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
-import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
 
-class CollectionActivity : AppCompatActivity() {
+class MyCollectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -108,4 +109,5 @@ class CollectionActivity : AppCompatActivity() {
             }
         }
     }
+
 }

@@ -53,13 +53,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/bebasbeue_regular"
-        android:text="All Heroes"
+        android:text="My Collection"
         android:textColor="#ee9b00"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

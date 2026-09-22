@@ -26,7 +26,7 @@ class PodiumActivity : AppCompatActivity() {
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
                     Log.d("RETURN", "Collection button")
-                    val intent = Intent(this, CollectionActivity::class.java)
+                    val intent = Intent(this, ChoseCollectionActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                     startActivity(intent)
                 }

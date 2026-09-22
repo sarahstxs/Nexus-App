@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ChoseCollectionActivity"
+    >
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000" />
+
+    <com.example.nexusappxml.ui.view.CustomNavBarView
+        android:id="@+id/nav_bar_customizada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.example.nexusappxml.ui.view.PerfilPreviewView
+        android:id="@+id/user_preview_component"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.nexusappxml.ui.view.CoinView
+        android:id="@+id/coin_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386"> <!-- Ajuste vertical opcional -->
+
+        <FrameLayout
+            android:id="@+id/btnMyCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- 1. Sombra Dura do Botão (Deslocada para baixo) -->
+            <View
+                android:layout_width="310dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/background_botao" />
+
+            <!-- 2. TextView estilizado como Botão -->
+            <TextView
+                android:id="@+id/MyRegister"
+                android:layout_width="317dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/back_bottom"
+                android:fontFamily="@font/bebasbeue_regular"
+                android:gravity="center"
+                android:text="My Collection"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnAllHeroes"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- 1. Sombra Dura do Botão (Deslocada para baixo) -->
+            <View
+                android:layout_width="310dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/background_botao" />
+
+            <!-- 2. TextView estilizado como Botão -->
+            <TextView
+                android:id="@+id/AllHeroes"
+                android:layout_width="317dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/back_bottom"
+                android:fontFamily="@font/bebasbeue_regular"
+                android:gravity="center"
+                android:text="All Heroes"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnComingSoon"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- 1. Sombra Dura do Botão (Deslocada para baixo) -->
+            <View
+                android:id="@+id/comingSoon"
+                android:layout_width="310dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_botao"
+                android:padding="0dp"/>
+
+
+            <!-- 2. TextView estilizado como Botão -->
+            <View
+                android:layout_width="317dp"
+                android:layout_height="100dp"
+                android:background="@drawable/back_bottom">
+            </View>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/storm_icon"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="30dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/bebasbeue_regular"
+                    android:gravity="center"
+                    android:text="Coming Soon!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="40sp"
+                    android:layout_marginStart="20dp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Collections"
+        android:textColor="#ee9b00"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/bebasbeue_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
