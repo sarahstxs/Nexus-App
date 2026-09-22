@@ -43,4 +43,11 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): Response<HeroResponse>
+
+    @GET("/user-heroes/list-all-user-heroes") // Confirme se a rota no Python é exatamente esta
+    suspend fun getUserHeroes(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("id_user") id_user: Int
+    ): Response<HeroResponse>
 }

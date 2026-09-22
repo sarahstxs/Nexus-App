@@ -13,7 +13,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.bumptech.glide.Glide
-import com.example.nexusappxml.MyCollectionActivity
+import com.example.nexusappxml.ui.activity.MyCollectionActivity
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
 import com.example.nexusappxml.ui.view.CoinView
