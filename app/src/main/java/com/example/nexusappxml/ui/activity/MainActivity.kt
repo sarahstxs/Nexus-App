@@ -85,6 +85,8 @@ class MainActivity : AppCompatActivity() {
 
                 val awser = apiService.login(loginDetails)
 
+                Log.d("TESTE_TOKEN", "Token recebido: ${awser.accessToken}")
+
                 // Salva o token
                 TokenManager.saveToken(this@MainActivity, awser.accessToken)
 

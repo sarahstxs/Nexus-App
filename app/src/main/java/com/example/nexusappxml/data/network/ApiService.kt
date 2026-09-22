@@ -1,5 +1,6 @@
 package com.example.nexusappxml.data.network
 
+import com.example.nexusappxml.data.model.HeroResponse
 import com.example.nexusappxml.data.model.LoginRequest
 import com.example.nexusappxml.data.model.RegisterRequest
 import com.example.nexusappxml.data.model.RegisterResponse
@@ -12,6 +13,7 @@ import retrofit2.http.POST
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 // Modelo de dados que recebe a resposta do token do FastAPI
 data class TokenResponse(
@@ -35,4 +37,10 @@ interface ApiService {
     suspend fun getUserDetails(
         @Path("id_user") id: Int
     ): Response<UserResponse>
+
+    @GET("/heroes/list-all-heroes") // Confirme se a rota no Python é exatamente esta
+    suspend fun getHeroes(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
+    ): Response<HeroResponse>
 }

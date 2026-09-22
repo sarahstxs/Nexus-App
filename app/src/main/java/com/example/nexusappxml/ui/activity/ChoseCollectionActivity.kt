@@ -101,8 +101,6 @@ class ChoseCollectionActivity : AppCompatActivity() {
 
     }
     fun goToMyCollection() {
-        TokenManager.clearToken(this)
-
         val intent = Intent(this, MyCollectionActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
@@ -111,8 +109,6 @@ class ChoseCollectionActivity : AppCompatActivity() {
     }
 
     fun goToAllHeroes() {
-        TokenManager.clearToken(this)
-
         val intent = Intent(this, CollectionActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 

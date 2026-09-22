@@ -37,6 +37,7 @@ class ItemAlbumView @JvmOverloads constructor(
         Glide.with(context)
             .load(imageUrl)
             .placeholder(R.drawable.shadow_perfil_icon) // Opcional: imagem de carregamento
+            .centerCrop()
             .into(imgHero)
     }
 }
