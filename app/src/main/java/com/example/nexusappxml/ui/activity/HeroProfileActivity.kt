@@ -4,7 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -71,12 +73,22 @@ class HeroProfileActivity : AppCompatActivity() {
 
                             val currentHp = if (isOwned && userHero != null) userHero.currentHp else baseHero.baseHp
                             val maxHp = if (isOwned && userHero != null) userHero.maxHp else baseHero.baseHp
+                            val rarityName = when(baseHero.rarity) {
+                                1 -> "Common"
+                                2 -> "Uncommon"
+                                3 -> "Rare"
+                                4 -> "Epic"
+                                5 -> "Legendary"
+                                6 -> "Mythic"
+                                else -> "Invalid"
+                            }
 
                             // MAPPING ALL VIEWS
                             val heroProfileImg = findViewById<ImageHeroProfileView>(R.id.componenteImgHero)
                             val txtHeroName = findViewById<TextView>(R.id.txtHeroName)
                             val txtRealName = findViewById<TextView>(R.id.txtRealName)
                             val txtHave = findViewById<TextView>(R.id.txtHave)
+                            val viewHave = findViewById<View>(R.id.viewHave)
 
                             val txtRarity = findViewById<TextView>(R.id.txtRarity)
                             val txtClass = findViewById<TextView>(R.id.txtClass)
@@ -103,25 +115,39 @@ class HeroProfileActivity : AppCompatActivity() {
                             txtHeroName.text = "${baseHero.name}"
                             txtRealName.text = baseHero.realName ?: "Unknown Identity"
 
+
+                            txtHave.setTextColor(Color.parseColor("#FFFFFF")) // Espaço extra removido aqui
+
                             if (isOwned) {
                                 txtHave.text = "Obtained"
-                                txtHave.setTextColor(Color.parseColor("#318333"))
+                                viewHave.setBackgroundColor(Color.parseColor("#125c0e"))
                             } else {
                                 txtHave.text = "Not obtained"
-                                txtHave.setTextColor(Color.parseColor("#D32F2F"))
+                                viewHave.setBackgroundColor(Color.parseColor("#D32F2F"))
                             }
 
                             // Variável com a cor vermelha para facilitar caso queira mudar depois
                             val c = "#c24044"
                             val a = "#ee9b00"
+                            val rarityColor = when (rarityName.lowercase()) {
+                                "common" -> "#B0BEC5"       // Cinza claro / Prateado (Limpo e neutro)
+                                "uncommon" -> "#81C784"     // Verde claro (Fácil de ver)
+                                "rare" -> "#64B5F6"         // Azul claro brilhante
+                                "epic" -> "#CE93D8"         // Roxo claro / Lavanda vibrante
+                                "legendary" -> "#FFD54F"    // Amarelo / Dourado solar
+                                "mythic" -> "#FF5252"       // Vermelho / Coral vivo (Destaque máximo)
+                                else -> "#EF5350"           // Vermelho padrão claro (caso venha algo desconhecido)
+                            }
+
+                            Log.d("TESTE", "${baseHero}")
 
                             // Base Details (Label em negrito e vermelho, Valor normal e preto)
-                            txtRarity.text = HtmlCompat.fromHtml("<b><font color='$c'>Rarity:</font></b> ${baseHero.rarity}", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtRarity.text = HtmlCompat.fromHtml("<font color='$rarityColor'> ${rarityName} </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtClass.text = HtmlCompat.fromHtml("<b><font color='$c'>Class:</font></b> ${baseHero.classHero}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtLevel.text = HtmlCompat.fromHtml("<b><font color='$c'>Level:</font></b> $level", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtLevel.text = HtmlCompat.fromHtml("<b><font color='$c'>Level:</font></b> Level $level", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtOrigin.text = HtmlCompat.fromHtml("<b><font color='$c'>Origin:</font></b> ${baseHero.origin ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtBirth.text = HtmlCompat.fromHtml("<b><font color='$c'>Birth:</font></b> ${baseHero.birth ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtAppearance.text = HtmlCompat.fromHtml("<b><font color='$c'>Appearances:</font></b> ${baseHero.appearance ?: 0}", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtAppearance.text = HtmlCompat.fromHtml("<b><font color='$c'>Appearances:</font></b> ${baseHero.appearance ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtFirstAppearanceComic.text = HtmlCompat.fromHtml("<b><font color='$c'>First comic:</font></b> ${baseHero.firstAppearanceComic ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtNemesis.text = HtmlCompat.fromHtml("<b><font color='$c'>Nemesis:</font></b> ${baseHero.nemesis ?: "None"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtGender.text = HtmlCompat.fromHtml("<b><font color='$c'>Gender:</font></b> ${baseHero.gender ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)

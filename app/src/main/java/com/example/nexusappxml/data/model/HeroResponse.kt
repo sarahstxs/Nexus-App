@@ -45,7 +45,7 @@ data class HeroDetails(
     @SerializedName("gender") val gender: Int?,
     @SerializedName("origin") val origin: Int?,
     @SerializedName("birth") val birth: String?,
-    @SerializedName("apperance") val appearance: Int?, // Escrito exatamente como na sua coluna "apperance"
+    @SerializedName("appearance") val appearance: Int?,
     @SerializedName("first_appearance_comic") val firstAppearanceComic: String?,
     @SerializedName("image_hero") val imageHero: String?,
     @SerializedName("nemesis") val nemesis: Int?,
