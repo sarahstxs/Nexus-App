@@ -120,14 +120,14 @@ class HeroProfileActivity : AppCompatActivity() {
 
                             if (isOwned) {
                                 txtHave.text = "Obtained"
-                                viewHave.setBackgroundColor(Color.parseColor("#125c0e"))
+                                viewHave.setBackgroundColor(Color.parseColor("#276615"))
                             } else {
                                 txtHave.text = "Not obtained"
                                 viewHave.setBackgroundColor(Color.parseColor("#D32F2F"))
                             }
 
                             // Variável com a cor vermelha para facilitar caso queira mudar depois
-                            val c = "#c24044"
+                            val c = "#FFFFFF"
                             val a = "#ee9b00"
                             val rarityColor = when (rarityName.lowercase()) {
                                 "common" -> "#B0BEC5"       // Cinza claro / Prateado (Limpo e neutro)
@@ -144,19 +144,19 @@ class HeroProfileActivity : AppCompatActivity() {
                             // Base Details (Label em negrito e vermelho, Valor normal e preto)
                             txtRarity.text = HtmlCompat.fromHtml("<font color='$rarityColor'> ${rarityName} </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtClass.text = HtmlCompat.fromHtml("<b><font color='$c'>Class:</font></b> ${baseHero.classHero}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtLevel.text = HtmlCompat.fromHtml("<b><font color='$c'>Level:</font></b> Level $level", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtLevel.text = HtmlCompat.fromHtml("<b><font color='$a'>Level<br></font></b> $level", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtOrigin.text = HtmlCompat.fromHtml("<b><font color='$c'>Origin:</font></b> ${baseHero.origin ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtBirth.text = HtmlCompat.fromHtml("<b><font color='$c'>Birth:</font></b> ${baseHero.birth ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtAppearance.text = HtmlCompat.fromHtml("<b><font color='$c'>Appearances:</font></b> ${baseHero.appearance ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtAppearance.text = HtmlCompat.fromHtml("<b><font color='$c'>Appearances:</font></b> ${baseHero.appearance ?: "Unknown"} times", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtFirstAppearanceComic.text = HtmlCompat.fromHtml("<b><font color='$c'>First comic:</font></b> ${baseHero.firstAppearanceComic ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtNemesis.text = HtmlCompat.fromHtml("<b><font color='$c'>Nemesis:</font></b> ${baseHero.nemesis ?: "None"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtGender.text = HtmlCompat.fromHtml("<b><font color='$c'>Gender:</font></b> ${baseHero.gender ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtDeck.text = HtmlCompat.fromHtml("<b><font color='$c'>Deck:</font></b> ${baseHero.deck ?: "None"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                             // Attributes
-                            txtFragments.text = HtmlCompat.fromHtml("<b><font color='$c'>Fragments:</font></b> $fragments", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtFragments.text = HtmlCompat.fromHtml("<b><font color='$a'>Fragments<br></font></b> $fragments", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtAttack.text = HtmlCompat.fromHtml("<b> ${baseHero.baseAtk}<br></b><font color='$a'> Ataque</font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtLife.text = HtmlCompat.fromHtml("<b>$currentHp / $maxHp<br></b><font color='$a'>Health </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtLife.text = HtmlCompat.fromHtml("<b>213 / 233<br></b><font color='$a'>Life </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtDefense.text = HtmlCompat.fromHtml("<b>${baseHero.baseDef}<br></b><font color='$a'>Defense </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtHyperAttack.text = HtmlCompat.fromHtml("<b><font color='$c'>Hiper ataque:</font></b> ${baseHero.hyperAttack}", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
