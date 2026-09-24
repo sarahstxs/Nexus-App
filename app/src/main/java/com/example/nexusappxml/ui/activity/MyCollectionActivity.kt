@@ -62,7 +62,12 @@ class MyCollectionActivity : AppCompatActivity() {
 
         // 3. Configurando o RecyclerView com o Adapter inicialmente vazio
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        albumAdapter = AlbumAdapter(emptyList()) // Começa vazio até a API responder
+        albumAdapter = AlbumAdapter(emptyList()) { idClicado ->
+            // Abre a tela da ficha do personagem passando o ID
+            val intent = Intent(this, HeroProfileActivity::class.java)
+            intent.putExtra("HEROI_ID", idClicado)
+            startActivity(intent)
+        }
         recyclerView.adapter = albumAdapter
 
         // 4. Configurando os cliques dos botões de página
@@ -140,10 +145,8 @@ class MyCollectionActivity : AppCompatActivity() {
                         val heroResponse = response.body()!!
 
                         // Pega a lista de imagens que veio da API
-                        val urls = heroResponse.images
-
-                        // Atualiza o RecyclerView diretamente!
-                        albumAdapter.updateData(urls)
+                        val herois = heroResponse.heroes ?: emptyList()
+                        albumAdapter.updateData(herois)
 
                         tvPage.text = "Página $page"
 
@@ -152,7 +155,7 @@ class MyCollectionActivity : AppCompatActivity() {
 
                         // Se a API retornou menos imagens que o limite pedido,
                         // significa que chegaram os últimos heróis do banco.
-                        btnNext.isEnabled = urls.size == limitPerPage
+                        btnNext.isEnabled = herois.size == limitPerPage
                     } else {
                         Log.e("ERRO_API_HEROIS", "Código do Erro: ${response.code()} - ${response.message()}")
                         Toast.makeText(this@MyCollectionActivity, "Erro ao carregar heróis", Toast.LENGTH_SHORT).show()

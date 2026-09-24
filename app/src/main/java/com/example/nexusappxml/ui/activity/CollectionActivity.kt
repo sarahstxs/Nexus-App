@@ -60,9 +60,14 @@ class CollectionActivity : AppCompatActivity() {
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
 
-        // 3. Configurando o RecyclerView com o Adapter inicialmente vazio
+        // 3. Configurando o RecyclerView com o Adapter e o Clique!
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        albumAdapter = AlbumAdapter(emptyList()) // Começa vazio até a API responder
+        albumAdapter = AlbumAdapter(emptyList()) { idClicado ->
+            // Abre a tela da Ficha do Personagem quando clicar em uma imagem
+            val intent = Intent(this@CollectionActivity, HeroProfileActivity::class.java)
+            intent.putExtra("HEROI_ID", idClicado)
+            startActivity(intent)
+        }
         recyclerView.adapter = albumAdapter
 
         // 4. Configurando os cliques dos botões de página
@@ -138,20 +143,16 @@ class CollectionActivity : AppCompatActivity() {
                     if (response.isSuccessful && response.body() != null) {
                         val heroResponse = response.body()!!
 
-                        // Pega a lista de imagens que veio da API
-                        val urls = heroResponse.images
+                        // CORREÇÃO: Usando o operador Elvis para evitar que a variável seja nula
+                        val herois = heroResponse.heroes ?: emptyList()
+                        albumAdapter.updateData(herois)
 
-                        // Atualiza o RecyclerView diretamente!
-                        albumAdapter.updateData(urls)
-
+                        // Atualiza o texto da página
                         tvPage.text = "Página $page"
 
                         // Regras dos botões de paginação
                         btnPrev.isEnabled = page > 1
-
-                        // Se a API retornou menos imagens que o limite pedido,
-                        // significa que chegaram os últimos heróis do banco.
-                        btnNext.isEnabled = urls.size == limitPerPage
+                        btnNext.isEnabled = herois.size == limitPerPage
                     } else {
                         Log.e("ERRO_API_HEROIS", "Código do Erro: ${response.code()} - ${response.message()}")
                         Toast.makeText(this@CollectionActivity, "Erro ao carregar heróis", Toast.LENGTH_SHORT).show()

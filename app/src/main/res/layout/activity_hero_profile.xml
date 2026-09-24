@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.nexusappxml.ui.view.CustomNavBarView
+        android:id="@+id/nav_bar_customizada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollInformacoes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="200dp"
+        android:background="#e9d8a6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar_customizada">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="100dp"
+            android:paddingBottom="30dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtFragments"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/bebasbeue_regular"
+                    android:text="Fragments: 1"
+                    android:textSize="25dp"/>
+
+
+                <TextView
+                    android:id="@+id/txtLevel"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Level: "
+                    android:textSize="25dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/bebasbeue_regular"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow_perfil_icon"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="3dp">
+                    <TextView
+                        android:id="@+id/txtAttack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:lineSpacingExtra="1dp"
+                        android:textColor="#000000"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/bebasbeue_regular"
+                        android:text="15 \n Ataque"
+                        android:textAlignment="center"
+                        android:background="@drawable/other_button"
+                        android:padding="15dp"/>
+                </LinearLayout>
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow_perfil_icon"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="3dp">
+                    <TextView
+                        android:id="@+id/txtLife"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:lineSpacingExtra="1dp"
+                        android:textColor="#000000"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/bebasbeue_regular"
+                        android:text="15 \n Vida"
+                        android:textAlignment="center"
+                        android:background="@drawable/other_button"
+                        android:padding="15dp"/>
+
+                </LinearLayout>
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow_perfil_icon"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="3dp">
+
+                    <TextView
+                        android:id="@+id/txtDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/other_button"
+                        android:fontFamily="@font/bebasbeue_regular"
+                        android:lineSpacingExtra="1dp"
+                        android:padding="15dp"
+                        android:text="15 \n Defense"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="25dp" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtRarity"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Rarity: "
+                    android:textSize="25dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/bebasbeue_regular"
+                     />
+
+                <TextView
+                    android:id="@+id/txtClass"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Class: "
+                    android:textSize="25dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/bebasbeue_regular"
+                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtOrigin"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Origin: "
+                    android:textSize="25dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/bebasbeue_regular"
+                     />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Birth:"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <TextView
+                android:id="@+id/txtAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Appearances:"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <TextView
+                android:id="@+id/txtFirstAppearanceComic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="First appearance comic:"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <TextView
+                android:id="@+id/txtNemesis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Nemesis:"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <TextView
+                android:id="@+id/txtGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Gender: "
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <TextView
+                android:id="@+id/txtDeck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="Deck: "
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+
+
+            <TextView
+                android:id="@+id/txtTribute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Attributes: "
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                 />
+
+            <!-- ADDED IDs HERE -->
+            <TextView
+                android:id="@+id/txtHyperAttack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:lineSpacingExtra="1dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bebasbeue_regular"
+                android:text="Hiper ataque: 15" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="200dp"
+        android:background="#e9d8a6"
+        app:layout_constraintTop_toTopOf="parent">
+    </View>
+
+    <com.example.nexusappxml.ui.view.ImageHeroProfileView
+        android:id="@+id/componenteImgHero"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="140dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollInformacoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtHeroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/bebasbeue_regular"
+        android:gravity="center"
+        android:text="Loki"
+        android:textColor="#ee9b00"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/componenteImgHero"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtRealName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/bebasbeue_regular"
+        android:gravity="center"
+        android:text="Loki Laufeyson"
+        android:textColor="#E4E4E4"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/componenteImgHero"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtHave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/bebasbeue_regular"
+        android:gravity="center"
+        android:text="obtained"
+        android:textColor="#318333"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/componenteImgHero"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeroName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

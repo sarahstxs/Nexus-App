@@ -1,5 +1,6 @@
 package com.example.nexusappxml.data.network
 
+import com.example.nexusappxml.data.model.HeroCompleteResponse
 import com.example.nexusappxml.data.model.HeroResponse
 import com.example.nexusappxml.data.model.LoginRequest
 import com.example.nexusappxml.data.model.RegisterRequest
@@ -50,4 +51,13 @@ interface ApiService {
         @Query("limit") limit: Int,
         @Query("id_user") id_user: Int
     ): Response<HeroResponse>
-}
+
+        // Aqui você coloca SÓ a rota base. O Retrofit monta os ? e & sozinho!
+        @GET("/heroes/list-complete-user-hero/{id_hero}/{id_user}")
+        suspend fun getHeroComplete(
+            @Path("id_hero") heroId: Int,
+            @Path("id_user") userId: Int
+        ): Response<HeroCompleteResponse>
+
+    }
+

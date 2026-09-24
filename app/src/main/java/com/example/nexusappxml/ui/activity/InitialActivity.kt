@@ -65,7 +65,7 @@ class InitialActivity : AppCompatActivity() {
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
                     Log.d("RETURN", "Collection button")
-                    val intent = Intent(this, ChoseCollectionActivity::class.java).apply {
+                    val intent = Intent(this, HeroProfileActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK or
                                 Intent.FLAG_ACTIVITY_NO_ANIMATION
