@@ -85,7 +85,7 @@ class RegisterActivity2 : AppCompatActivity() {
             false,
             true,
             1,
-            300,
+            1000,
             LocalDateTime.now().toString(),
             1
         )

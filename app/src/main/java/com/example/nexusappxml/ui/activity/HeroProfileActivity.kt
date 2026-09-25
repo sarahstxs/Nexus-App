@@ -156,7 +156,7 @@ class HeroProfileActivity : AppCompatActivity() {
                             // Attributes
                             txtFragments.text = HtmlCompat.fromHtml("<b><font color='$a'>Fragments<br></font></b> $fragments", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtAttack.text = HtmlCompat.fromHtml("<b> ${baseHero.baseAtk}<br></b><font color='$a'> Ataque</font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtLife.text = HtmlCompat.fromHtml("<b>213 / 233<br></b><font color='$a'>Life </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtLife.text = HtmlCompat.fromHtml("<b>${currentHp} / ${maxHp}<br></b><font color='$a'>Life </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtDefense.text = HtmlCompat.fromHtml("<b>${baseHero.baseDef}<br></b><font color='$a'>Defense </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtHyperAttack.text = HtmlCompat.fromHtml("<b><font color='$c'>Hiper ataque:</font></b> ${baseHero.hyperAttack}", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
