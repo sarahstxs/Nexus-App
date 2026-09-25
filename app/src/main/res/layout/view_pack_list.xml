@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="4dp"
+    android:background="@drawable/shadow_perfil_icon"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingBottom="3dp"
+    android:paddingRight="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/other_button"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#ee9b00"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:text="X-Men"
+                android:fontFamily="@font/bebasbeue_regular" />
+
+            <TextView
+                android:id="@+id/txtDeck"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:text="Ai q sla oque sla oque mais, dai eles morreram mas nunca vão morreAi q sla oque sla oque mbla bla, ela sla, sla"
+                android:textAlignment="textStart"
+                android:fontFamily="@font/bebasbeue_regular"
+                android:layout_marginLeft="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#ee9b00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="500 coins"
+                    android:fontFamily="@font/bebasbeue_regular"/>
+
+                <!-- 2. TextView estilizado como Botão -->
+                <LinearLayout
+                    android:id="@+id/btnBuy"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow_perfil_icon"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="3dp"
+                    android:layout_marginStart="130dp">
+
+                    <!-- O clickable="true" foi REMOVIDO daqui para o LinearLayout @id/btnBuy conseguir escutar o clique no Kotlin! -->
+                    <TextView
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ee9b00"
+                        android:fontFamily="@font/bebasbeue_regular"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Buy Pack"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

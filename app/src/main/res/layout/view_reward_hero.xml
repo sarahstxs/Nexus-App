@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/other_button"
+    android:padding="12dp"
+    android:layout_marginVertical="6dp">
+
+    <!-- Imagem do Herói ganho -->
+    <ImageView
+        android:id="@+id/imgHeroReward"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:background="#191919" />
+
+    <!-- Nome do Herói ganho -->
+    <TextView
+        android:id="@+id/txtHeroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bebasbeue_regular" />
+
+</LinearLayout>

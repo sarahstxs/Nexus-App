@@ -3,9 +3,11 @@ package com.example.nexusappxml.data.network
 import com.example.nexusappxml.data.model.HeroCompleteResponse
 import com.example.nexusappxml.data.model.HeroResponse
 import com.example.nexusappxml.data.model.LoginRequest
+import com.example.nexusappxml.data.model.PackResponse
 import com.example.nexusappxml.data.model.RegisterRequest
 import com.example.nexusappxml.data.model.RegisterResponse
 import com.example.nexusappxml.data.model.UserResponse
+import com.google.gson.JsonElement
 import com.google.gson.annotations.SerializedName
 import retrofit2.Response
 import retrofit2.http.Field
@@ -53,11 +55,21 @@ interface ApiService {
     ): Response<HeroResponse>
 
         // Aqui você coloca SÓ a rota base. O Retrofit monta os ? e & sozinho!
-        @GET("/heroes/list-complete-user-hero/{id_hero}/{id_user}")
-        suspend fun getHeroComplete(
+    @GET("/heroes/list-complete-user-hero/{id_hero}/{id_user}")
+    suspend fun getHeroComplete(
             @Path("id_hero") heroId: Int,
             @Path("id_user") userId: Int
-        ): Response<HeroCompleteResponse>
+    ): Response<HeroCompleteResponse>
+
+    @GET("/packs/list-active") // Ajuste o caminho caso tenha um prefixo como "pack/list-active"
+    suspend fun getActivePacks(): Response<PackResponse>
+
+    // Nova rota para comprar o pack
+    @GET("/users/comprar-pack/{id_user}/{id_pack}")
+    suspend fun buyPack(
+        @Path("id_user") userId: Int,
+        @Path("id_pack") packId: Int
+    ): Response<JsonElement>
 
     }
 

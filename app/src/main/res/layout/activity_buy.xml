@@ -5,8 +5,96 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.BuyActivity"
+    tools:context=".ui.activity.CollectionActivity"
     android:background="#e9d8a6">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.nexusappxml.ui.view.PerfilPreviewView
+        android:id="@+id/user_preview_component"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.nexusappxml.ui.view.CoinView
+        android:id="@+id/coin_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/bebasbeue_regular"
+        android:text="Buy Packs"
+        android:textColor="#ee9b00"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_preview_component" />
+
+    <!-- RECYCLER VIEW AJUSTADO -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAlbuns"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/pagination_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- CONTROLES DE PAGINAÇÃO -->
+    <LinearLayout
+        android:id="@+id/pagination_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar_customizada">
+
+        <Button
+            android:id="@+id/btn_prev_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/other_button"
+            android:text="Anterior"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Página 1"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_next_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/other_button"
+            android:text="Próximo"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <com.example.nexusappxml.ui.view.CustomNavBarView
         android:id="@+id/nav_bar_customizada"

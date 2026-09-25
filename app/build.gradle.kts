@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
+    id("kotlin-parcelize")
 }
 
 val properties = Properties()
