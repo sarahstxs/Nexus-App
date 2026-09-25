@@ -2,7 +2,6 @@ package com.example.nexusappxml.ui.activity
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
-import com.example.nexusappxml.data.model.WonHeroModel
+import com.example.nexusappxml.data.model.WonHeroRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -29,8 +28,8 @@ class PackRewardActivity : AppCompatActivity() {
 
         if (!heroesJson.isNullOrEmpty()) {
             try {
-                val listType = object : TypeToken<List<WonHeroModel>>() {}.type
-                val heroes: List<WonHeroModel>? = Gson().fromJson(heroesJson, listType)
+                val listType = object : TypeToken<List<WonHeroRequest>>() {}.type
+                val heroes: List<WonHeroRequest>? = Gson().fromJson(heroesJson, listType)
 
                 heroes?.forEachIndexed { index, hero ->
                     // Infla o novo layout criado especificamente para as recompensas

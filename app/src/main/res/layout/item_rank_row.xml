@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/other_button"
+    android:padding="12dp"
+    android:layout_marginVertical="6dp">
+
+    <!-- Posição no Ranking (#1, #2...) -->
+    <TextView
+        android:id="@+id/txtPosition"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#ee9b00"
+        android:gravity="center"
+        android:fontFamily="@font/bebasbeue_regular" />
+
+    <!-- Nome do Usuário -->
+    <TextView
+        android:id="@+id/txtUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bebasbeue_regular" />
+
+    <!-- Nível do Usuário -->
+    <TextView
+        android:id="@+id/txtUserLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bebasbeue_regular" />
+
+</LinearLayout>

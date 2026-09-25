@@ -4,6 +4,7 @@ import com.example.nexusappxml.data.model.HeroCompleteResponse
 import com.example.nexusappxml.data.model.HeroResponse
 import com.example.nexusappxml.data.model.LoginRequest
 import com.example.nexusappxml.data.model.PackResponse
+import com.example.nexusappxml.data.model.RankResponse
 import com.example.nexusappxml.data.model.RegisterRequest
 import com.example.nexusappxml.data.model.RegisterResponse
 import com.example.nexusappxml.data.model.UserResponse
@@ -71,5 +72,9 @@ interface ApiService {
         @Path("id_pack") packId: Int
     ): Response<JsonElement>
 
-    }
+    @GET("/users/show-rank")
+    suspend fun getRank(): Response<RankResponse>
+}
+
+
 

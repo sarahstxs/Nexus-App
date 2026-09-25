@@ -16,14 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
-import com.example.nexusappxml.data.model.WonHeroModel
 import com.example.nexusappxml.data.network.RetrofitClient
 import com.example.nexusappxml.ui.adapter.PackAdapter
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
 import com.example.nexusappxml.ui.view.PerfilPreviewView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
