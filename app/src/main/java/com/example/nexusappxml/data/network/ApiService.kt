@@ -1,5 +1,6 @@
 package com.example.nexusappxml.data.network
 
+import com.example.nexusappxml.data.model.DeckResponse
 import com.example.nexusappxml.data.model.HeroCompleteResponse
 import com.example.nexusappxml.data.model.HeroResponse
 import com.example.nexusappxml.data.model.LoginRequest
@@ -10,12 +11,14 @@ import com.example.nexusappxml.data.model.RegisterResponse
 import com.example.nexusappxml.data.model.UserResponse
 import com.google.gson.JsonElement
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -74,6 +77,19 @@ interface ApiService {
 
     @GET("/users/show-rank")
     suspend fun getRank(): Response<RankResponse>
+
+    @GET("/decks/list-user-decks")
+    suspend fun listUserDecks(): Response<List<DeckResponse>>
+
+    @POST("/decks/save-deck")
+    suspend fun saveDeck(
+        @Query("id_hero1") h1: Int,
+        @Query("id_hero2") h2: Int,
+        @Query("id_hero3") h3: Int,
+        @Query("id_hero4") h4: Int,
+        @Query("id_hero5") h5: Int,
+        @Query("id_hero6") h6: Int
+    ): Response<JsonElement>
 }
 
 

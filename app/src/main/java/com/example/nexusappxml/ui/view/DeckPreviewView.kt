@@ -17,10 +17,9 @@ class ItemAlbumView @JvmOverloads constructor(
     private val imgHero: ImageView
 
     init {
-        // Infla o seu XML exato (substitua 'view_deck_preview' pelo nome real do seu arquivo XML se for diferente)
-        LayoutInflater.from(context).inflate(R.layout.view_deck_preview, this, true)
+        // CORREÇÃO: Altere de view_deck_preview para item_album (que é o layout correto da grid de heróis)
+        LayoutInflater.from(context).inflate(R.layout.item_album, this, true)
 
-        // Ajusta os parâmetros para que o item caiba bem no RecyclerView / Grid
         layoutParams = MarginLayoutParams(
             MarginLayoutParams.WRAP_CONTENT,
             MarginLayoutParams.WRAP_CONTENT
@@ -28,15 +27,13 @@ class ItemAlbumView @JvmOverloads constructor(
             setMargins(8, 8, 8, 8)
         }
 
-        // Encontra o ImageView dentro do seu ConstraintLayout (btnGoDeck)
-        imgHero = findViewById(R.id.imgHero)
+        imgHero = findViewById(R.id.imgAlbum)
     }
 
-    // Função para carregar a imagem dinamicamente via Glide
     fun bind(imageUrl: String) {
         Glide.with(context)
             .load(imageUrl)
-            .placeholder(R.drawable.shadow_perfil_icon) // Opcional: imagem de carregamento
+            .placeholder(R.drawable.shadow_perfil_icon)
             .centerCrop()
             .into(imgHero)
     }

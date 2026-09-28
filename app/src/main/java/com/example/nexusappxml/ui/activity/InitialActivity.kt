@@ -6,20 +6,60 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
 import com.example.nexusappxml.data.local.TokenManager
+import com.example.nexusappxml.data.model.HeroItemResponse
+import com.example.nexusappxml.data.network.RetrofitClient
 import com.example.nexusappxml.ui.view.CoinView
 import com.example.nexusappxml.ui.view.CustomNavBarView
 import com.example.nexusappxml.ui.view.GoBattleButton
 import com.example.nexusappxml.ui.view.PerfilPreviewView
+import kotlinx.coroutines.launch
 
 class InitialActivity : AppCompatActivity() {
+
+    private lateinit var heroImageViews: List<ImageView>
+    private lateinit var btnManageDeck: Button
+
+    // Lista local que representa os 6 espaços do deck (null = espaço vazio)
+    private val deckHeroes = MutableList<HeroItemResponse?>(6) { null }
+    private var selectedSlotIndex: Int = -1
+
+    // Recebe o ID e a URL da imagem da MyCollectionActivity quando um herói é selecionado
+    private val selectHeroLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val heroId = result.data?.getIntExtra("EXTRA_HERO_ID", -1) ?: -1
+            val heroImageUrl = result.data?.getStringExtra("EXTRA_HERO_IMAGE_URL") ?: ""
+
+            if (heroId != -1 && selectedSlotIndex in 0..5) {
+
+                // VALIDAÇÃO: Impede adicionar um herói que já está presente em outro slot do deck
+                val heroAlreadyInDeck = deckHeroes.any { it?.id == heroId }
+
+                if (heroAlreadyInDeck) {
+                    Toast.makeText(this, "Você não pode colocar um herói repetido no deck!", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Adiciona normalmente se não for repetido
+                    deckHeroes[selectedSlotIndex] = HeroItemResponse(id = heroId, name = null, imageUrl = heroImageUrl)
+                    updateDeckUI()
+
+                    // Guarda automaticamente no backend se todos os 6 espaços estiverem preenchidos
+                    saveDeckToBackend()
+                }
+            }
+        }
+        selectedSlotIndex = -1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,94 +68,162 @@ class InitialActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
-
-        // Esconde a barra de navegação
         controller.hide(WindowInsetsCompat.Type.navigationBars())
-
-        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
-        var imgBackground = findViewById<ImageView>(R.id.imgBackground)
-
+        val imgBackground = findViewById<ImageView>(R.id.imgBackground)
         Glide.with(this)
             .load("https://i.pinimg.com/736x/a7/2a/02/a72a022f37c47d8d294e85577737f362.jpg")
             .centerCrop()
             .into(imgBackground)
 
-
-
-
         val perfilPreview = findViewById<PerfilPreviewView>(R.id.user_preview_component)
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
         val coinsView = findViewById<CoinView>(R.id.coin_view)
         val btnGoBattle = findViewById<GoBattleButton>(R.id.btn_go_battle)
-//        val btnGoDeckPage = findViewById<DeckPreviewView>(R.id.btn_go_deck)
+
+        // Inicializa os 6 ImageViews dos heróis do deck
+        heroImageViews = listOf(
+            findViewById(R.id.imgHero1),
+            findViewById(R.id.imgHero2),
+            findViewById(R.id.imgHero3),
+            findViewById(R.id.imgHero4),
+            findViewById(R.id.imgHero5),
+            findViewById(R.id.imgHero6)
+        )
+
 
         val userIdReal = TokenManager.getUserId(this)
-
-        // Carrega dados do perfil e moedas
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
 
-        // Avisa a barra que o usuário está na tela de battle (ou inicial)
-        navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
+        // Carrega os decks do utilizador a partir da API
+        loadUserDecks()
 
-        // Configura a ação de clique vinda da barra de navegação
+        // Configura o clique individual nos espaços de heróis (remover ou adicionar)
+        setupHeroSlotClicks()
+
+        navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
         navBar.onAbaSelectedListener = { aba ->
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
-                    Log.d("RETURN", "Collection button")
-                    val intent = Intent(this, ChoseCollectionActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
-                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    val intent = Intent(this, MyCollectionActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION
                     }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.BUY -> {
-                    Log.d("RETURN", "Buy button")
                     val intent = Intent(this, BuyActivity::class.java).apply {
-                        // Combina as flags corretamente usando 'or'
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
-                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION
                     }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.PODIUM -> {
-                    Log.d("RETURN", "Podium button")
                     val intent = Intent(this, PodiumActivity::class.java).apply {
-                        // Combina as flags corretamente usando 'or'
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or
-                                Intent.FLAG_ACTIVITY_NO_ANIMATION
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION
                     }
                     startActivity(intent)
                 }
                 CustomNavBarView.Aba.WHO -> {
-                    Log.d("RETURN", "Who button")
-                    Toast.makeText(this@InitialActivity, "Coming soon", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@InitialActivity, "Em breve", Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
         }
 
-        // Adiciona o botão para batalhar
         btnGoBattle.GotoBattle()
-
-        // Adicionar preview do deck
-//        btnGoDeckPage.GotoDeckPage()
-
-        // Botão de sair/voltar para o login
         perfilPreview.setOnClickListener { backToLogin() }
+    }
+
+    private fun setupHeroSlotClicks() {
+        for (i in heroImageViews.indices) {
+            heroImageViews[i].setOnClickListener {
+                if (deckHeroes[i] != null) {
+                    // ESPAÇO PREENCHIDO: Clicar remove o herói do deck localmente
+                    deckHeroes[i] = null
+                    updateDeckUI()
+                    Toast.makeText(this, "Herói removido do deck", Toast.LENGTH_SHORT).show()
+                } else {
+                    // ESPAÇO VAZIO: Abre a coleção em modo de seleção
+                    selectedSlotIndex = i
+                    val intent = Intent(this, MyCollectionActivity::class.java).apply {
+                        putExtra("SELECT_MODE", true)
+                    }
+                    selectHeroLauncher.launch(intent)
+                }
+            }
+        }
+    }
+
+    private fun loadUserDecks() {
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.getInstance(this@InitialActivity).listUserDecks()
+                if (response.isSuccessful && response.body() != null) {
+                    val userDecks = response.body()!!
+
+                    if (userDecks.isNotEmpty()) {
+                        val activeDeck = userDecks.first()
+                        val apiHeroes = activeDeck.heroes ?: emptyList()
+
+                        for (i in 0 until 6) {
+                            deckHeroes[i] = if (i < apiHeroes.size) apiHeroes[i] else null
+                        }
+                        updateDeckUI()
+                    }
+                } else {
+                    Toast.makeText(this@InitialActivity, "Erro ao carregar decks", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("InitialActivity", "Erro de ligação: ${e.message}")
+            }
+        }
+    }
+
+    private fun saveDeckToBackend() {
+        // Apenas guarda se os 6 espaços estiverem completamente preenchidos
+        if (deckHeroes.any { it == null }) return
+
+        val h1 = deckHeroes[0]?.id ?: return
+        val h2 = deckHeroes[1]?.id ?: return
+        val h3 = deckHeroes[2]?.id ?: return
+        val h4 = deckHeroes[3]?.id ?: return
+        val h5 = deckHeroes[4]?.id ?: return
+        val h6 = deckHeroes[5]?.id ?: return
+
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.getInstance(this@InitialActivity).saveDeck(h1, h2, h3, h4, h5, h6)
+                if (response.isSuccessful) {
+                    Toast.makeText(this@InitialActivity, "Deck guardado com sucesso!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@InitialActivity, "Erro ao guardar deck", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("InitialActivity", "Erro de ligação ao guardar: ${e.message}")
+            }
+        }
+    }
+
+    private fun updateDeckUI() {
+        for (i in heroImageViews.indices) {
+            val hero = deckHeroes[i]
+            if (hero != null && !hero.imageUrl.isNullOrEmpty()) {
+                Glide.with(this)
+                    .load(hero.imageUrl)
+                    .centerCrop()
+                    .into(heroImageViews[i])
+            } else {
+                heroImageViews[i].setImageDrawable(null)
+                heroImageViews[i].setBackgroundColor(resources.getColor(android.R.color.darker_gray, null))
+            }
+        }
     }
 
     fun backToLogin() {
         TokenManager.clearToken(this@InitialActivity)
-
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
         startActivity(intent)
         finish()
     }
