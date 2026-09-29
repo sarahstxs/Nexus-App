@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="125dp"
+    android:layout_width="115dp"
     android:layout_height="160dp"
     android:background="@drawable/shadow_perfil_icon"
     android:orientation="horizontal">
@@ -11,7 +11,7 @@
         android:background="@drawable/other_button">
         <ImageView
             android:id="@+id/imgAlbum"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="135dp"
             android:background="#191919"
             android:layout_marginHorizontal="10dp"
