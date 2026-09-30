@@ -115,7 +115,7 @@ class InitialActivity : AppCompatActivity() {
         navBar.onAbaSelectedListener = { aba ->
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
-                    val intent = Intent(this, MyCollectionActivity::class.java).apply {
+                    val intent = Intent(this, ChoseCollectionActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION
                     }
                     startActivity(intent)
