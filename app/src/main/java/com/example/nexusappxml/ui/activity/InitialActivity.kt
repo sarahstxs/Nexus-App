@@ -3,8 +3,8 @@ package com.example.nexusappxml.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 class InitialActivity : AppCompatActivity() {
 
     private lateinit var heroImageViews: List<ImageView>
-    private lateinit var btnManageDeck: Button
 
     // Lista local que representa os 6 espaços do deck (null = espaço vazio)
     private val deckHeroes = MutableList<HeroItemResponse?>(6) { null }
@@ -81,8 +80,9 @@ class InitialActivity : AppCompatActivity() {
         val navBar: CustomNavBarView = findViewById(R.id.nav_bar_customizada)
         val coinsView = findViewById<CoinView>(R.id.coin_view)
         val btnGoBattle = findViewById<GoBattleButton>(R.id.btn_go_battle)
+        val btnCurrentLevel = findViewById<TextView>(R.id.currentLevel)
 
-        // Inicializa os 6 ImageViews dos heróis do deck
+        // Inicializa os 6 ImageViews dos heróis do deck correspondentes ao XML atualizado
         heroImageViews = listOf(
             findViewById(R.id.imgHero1),
             findViewById(R.id.imgHero2),
@@ -92,16 +92,24 @@ class InitialActivity : AppCompatActivity() {
             findViewById(R.id.imgHero6)
         )
 
-
         val userIdReal = TokenManager.getUserId(this)
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
+
+        perfilPreview.loadDatas(idDoUsuario = userIdReal) {
+            // Só executa depois que a API responder e o txtLevel.text estiver preenchido
+            btnCurrentLevel.text = perfilPreview.txtLevel.text
+        }
+
+        coinsView.loadCoins(idDoUsuario = userIdReal)
 
         // Carrega os decks do utilizador a partir da API
         loadUserDecks()
 
         // Configura o clique individual nos espaços de heróis (remover ou adicionar)
         setupHeroSlotClicks()
+
+        btnCurrentLevel.text = getString(R.string.level_format, perfilPreview.txtLevel.text)
 
         navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
         navBar.onAbaSelectedListener = { aba ->
@@ -131,7 +139,25 @@ class InitialActivity : AppCompatActivity() {
             }
         }
 
-        btnGoBattle.GotoBattle()
+        // Configuração do botão de ir para a batalha com validação do deck completo
+        btnGoBattle.setOnClickListener {
+            if (deckHeroes.any { it == null }) {
+                Toast.makeText(this, "Precisas de preencher todos os 6 espaços do deck antes de lutar!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Extrai os IDs dos 6 heróis do deck atual
+            val heroIds = ArrayList(deckHeroes.map { it!!.id })
+
+            // Abre a BattleActivity enviando os dados da equipa, o andar e o local
+            val intent = Intent(this, BattleActivity::class.java).apply {
+                putIntegerArrayListExtra("EXTRA_DECK_HERO_IDS", heroIds)
+                putExtra("EXTRA_FLOOR", 1)    // Começa no andar 1 da torre
+                putExtra("EXTRA_PLACE_ID", 1) // ID padrão do local
+            }
+            startActivity(intent)
+        }
+
         perfilPreview.setOnClickListener { backToLogin() }
     }
 

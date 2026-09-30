@@ -1,5 +1,6 @@
 package com.example.nexusappxml.data.network
 
+import com.example.nexusappxml.data.model.BattleResolveResponse
 import com.example.nexusappxml.data.model.DeckResponse
 import com.example.nexusappxml.data.model.HeroCompleteResponse
 import com.example.nexusappxml.data.model.HeroResponse
@@ -90,6 +91,19 @@ interface ApiService {
         @Query("id_hero5") h5: Int,
         @Query("id_hero6") h6: Int
     ): Response<JsonElement>
+
+    // Dentro da sua interface ApiService:
+    @POST("/battles/start")
+    suspend fun resolveBattle(
+        @Query("floor") floor: Int,
+        @Query("place_id") placeId: Int,
+        @Query("hero1") h1: Int,
+        @Query("hero2") h2: Int,
+        @Query("hero3") h3: Int,
+        @Query("hero4") h4: Int,
+        @Query("hero5") h5: Int,
+        @Query("hero6") h6: Int
+    ): Response<BattleResolveResponse>
 }
 
 
