@@ -23,13 +23,14 @@
 
             <TextView
                 android:id="@+id/txtTitulo"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="130dp"
                 android:layout_weight="1"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:textColor="#ee9b00"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:text="X-Men"
                 android:fontFamily="@font/bebasbeue_regular" />
@@ -44,7 +45,7 @@
                 android:text="Ai q sla oque sla oque mais, dai eles morreram mas nunca vão morreAi q sla oque sla oque mbla bla, ela sla, sla"
                 android:textAlignment="textStart"
                 android:fontFamily="@font/bebasbeue_regular"
-                android:layout_marginLeft="16dp" />
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

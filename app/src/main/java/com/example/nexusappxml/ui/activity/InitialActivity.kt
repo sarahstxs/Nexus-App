@@ -93,12 +93,10 @@ class InitialActivity : AppCompatActivity() {
         )
 
         val userIdReal = TokenManager.getUserId(this)
-        perfilPreview.loadDatas(userIdReal)
-        coinsView.loadCoins(userIdReal)
 
         perfilPreview.loadDatas(idDoUsuario = userIdReal) {
             // Só executa depois que a API responder e o txtLevel.text estiver preenchido
-            btnCurrentLevel.text = perfilPreview.txtLevel.text
+            btnCurrentLevel.text = getString(R.string.level_format, perfilPreview.txtLevel.text)
         }
 
         coinsView.loadCoins(idDoUsuario = userIdReal)
@@ -108,8 +106,6 @@ class InitialActivity : AppCompatActivity() {
 
         // Configura o clique individual nos espaços de heróis (remover ou adicionar)
         setupHeroSlotClicks()
-
-        btnCurrentLevel.text = getString(R.string.level_format, perfilPreview.txtLevel.text)
 
         navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
         navBar.onAbaSelectedListener = { aba ->
@@ -146,12 +142,14 @@ class InitialActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Extrai os IDs dos 6 heróis do deck atual
+            // Extrai os IDs e as imagens dos 6 heróis do deck atual
             val heroIds = ArrayList(deckHeroes.map { it!!.id })
+            val heroImages = ArrayList(deckHeroes.map { it!!.imageUrl ?: "" })
 
-            // Abre a BattleActivity enviando os dados da equipa, o andar e o local
+            // Abre a BattleActivity enviando os dados da equipa, imagens, o andar e o local
             val intent = Intent(this, BattleActivity::class.java).apply {
                 putIntegerArrayListExtra("EXTRA_DECK_HERO_IDS", heroIds)
+                putStringArrayListExtra("EXTRA_DECK_HERO_IMAGES", heroImages)
                 putExtra("EXTRA_FLOOR", 1)    // Começa no andar 1 da torre
                 putExtra("EXTRA_PLACE_ID", 1) // ID padrão do local
             }

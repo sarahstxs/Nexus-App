@@ -59,7 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:text="Level 37"
         android:textColor="#ee9b00"
         android:textSize="48sp"
         android:textStyle="bold"

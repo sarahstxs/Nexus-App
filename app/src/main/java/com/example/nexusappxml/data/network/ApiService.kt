@@ -94,7 +94,7 @@ interface ApiService {
 
     // Dentro da sua interface ApiService:
     @POST("/battles/start")
-    suspend fun resolveBattle(
+    suspend fun startBattle(
         @Query("floor") floor: Int,
         @Query("place_id") placeId: Int,
         @Query("hero1") h1: Int,
