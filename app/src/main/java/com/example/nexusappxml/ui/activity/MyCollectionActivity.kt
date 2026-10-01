@@ -3,6 +3,7 @@ package com.example.nexusappxml.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,7 +34,6 @@ class MyCollectionActivity : AppCompatActivity() {
     private lateinit var tvPage: TextView
     private lateinit var albumAdapter: AlbumAdapter
 
-    // Armazena a lista atual de heróis para consulta segura no clique
     private var currentHeroesList: List<Any> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,14 +65,13 @@ class MyCollectionActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = GridLayoutManager(this, 3)
 
-        albumAdapter = AlbumAdapter(emptyList()) { idClicado ->
+        albumAdapter = AlbumAdapter(emptyList()) { clickedId ->
             if (isSelectingForDeck) {
-                // Encontra o herói clicado na lista atual para extrair a URL da imagem dinamicamente
                 val clickedHero = currentHeroesList.find { hero ->
                     try {
                         val idField = hero.javaClass.getDeclaredField("id")
                         idField.isAccessible = true
-                        (idField.get(hero) as? Int) == idClicado
+                        (idField.get(hero) as? Int) == clickedId
                     } catch (e: Exception) {
                         false
                     }
@@ -80,16 +79,16 @@ class MyCollectionActivity : AppCompatActivity() {
 
                 val imageUrl = clickedHero?.let { getHeroImageUrl(it) } ?: ""
 
-                // Devolve o ID e a URL da imagem para a InitialActivity
+                // Returns the hero ID and image URL to InitialActivity
                 val resultIntent = Intent().apply {
-                    putExtra("EXTRA_HERO_ID", idClicado)
+                    putExtra("EXTRA_HERO_ID", clickedId)
                     putExtra("EXTRA_HERO_IMAGE_URL", imageUrl)
                 }
                 setResult(RESULT_OK, resultIntent)
                 finish()
             } else {
                 val intent = Intent(this, HeroProfileActivity::class.java)
-                intent.putExtra("HEROI_ID", idClicado)
+                intent.putExtra("HERO_ID", clickedId)
                 startActivity(intent)
             }
         }
@@ -145,7 +144,7 @@ class MyCollectionActivity : AppCompatActivity() {
     }
 
     private fun fetchHeroes(page: Int, idUser: Int) {
-        tvPage.text = "Carregando..."
+        tvPage.text = "Loading..."
         btnPrev.isEnabled = false
         btnNext.isEnabled = false
 
@@ -155,25 +154,25 @@ class MyCollectionActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val heroResponse = response.body()!!
-                        val herois = heroResponse.heroes ?: emptyList()
+                        val heroes = heroResponse.heroes ?: emptyList()
 
-                        currentHeroesList = herois as List<Any>
-                        albumAdapter.updateData(herois)
+                        currentHeroesList = heroes as List<Any>
+                        albumAdapter.updateData(heroes)
 
-                        tvPage.text = "Página $page"
+                        tvPage.text = "Page $page"
                         btnPrev.isEnabled = page > 1
-                        btnNext.isEnabled = herois.size == limitPerPage
+                        btnNext.isEnabled = heroes.size == limitPerPage
                     } else {
-                        Toast.makeText(this@MyCollectionActivity, "Erro ao carregar heróis", Toast.LENGTH_SHORT).show()
-                        tvPage.text = "Página $page"
+                        Toast.makeText(this@MyCollectionActivity, "Error loading heroes", Toast.LENGTH_SHORT).show()
+                        tvPage.text = "Page $page"
                         btnPrev.isEnabled = page > 1
                         btnNext.isEnabled = true
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MyCollectionActivity, "Falha na conexão", Toast.LENGTH_SHORT).show()
-                    tvPage.text = "Página $page"
+                    Toast.makeText(this@MyCollectionActivity, "Connection failed", Toast.LENGTH_SHORT).show()
+                    tvPage.text = "Page $page"
                     btnPrev.isEnabled = page > 1
                     btnNext.isEnabled = true
                 }
@@ -181,7 +180,6 @@ class MyCollectionActivity : AppCompatActivity() {
         }
     }
 
-    // Helper robusto para extrair a URL da imagem independentemente do nome do campo no modelo
     private fun getHeroImageUrl(obj: Any): String {
         try {
             val clazz = obj.javaClass

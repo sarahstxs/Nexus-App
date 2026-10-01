@@ -25,12 +25,13 @@ object TokenManager {
             .remove(TOKEN_KEY)
             .apply()
     }
-
+    // Salvar usuário
     fun saveUserId(context: Context, id: Int) {
         val prefs = context.getSharedPreferences("prefs_nexus_app", Context.MODE_PRIVATE)
         prefs.edit().putInt("USER_ID", id).apply()
     }
 
+    // Mostrar id do usuário
     fun getUserId(context: Context): Int {
         val prefs = context.getSharedPreferences("prefs_nexus_app", Context.MODE_PRIVATE)
         return prefs.getInt("USER_ID", -1) // Retorna -1 se der erro ou não achar

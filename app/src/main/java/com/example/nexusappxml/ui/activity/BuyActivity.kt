@@ -43,12 +43,10 @@ class BuyActivity : AppCompatActivity() {
         val imgBackground = findViewById<ImageView>(R.id.imgBackground)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewAlbuns)
 
-        // Vinculando os elementos de texto/botões de paginação do XML
         btnPrev = findViewById(R.id.btn_prev_page)
         btnNext = findViewById(R.id.btn_next_page)
         tvPage = findViewById(R.id.tv_page_number)
 
-        // Como a rota /list-active traz todos os packs de uma vez, ocultamos os botões de paginação
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
 
@@ -61,15 +59,13 @@ class BuyActivity : AppCompatActivity() {
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
 
-        // 3. Configurando o RecyclerView com o Adapter e o clique no botão "Buy Pack"
         recyclerView.layoutManager = LinearLayoutManager(this)
-        packAdapter = PackAdapter(emptyList()) { packSelecionado ->
-            // Ação ao clicar no botão de comprar do pack
-            realizarCompraPack(packSelecionado.id)
+        packAdapter = PackAdapter(emptyList()) { selectedPack ->
+            buyPackAction(selectedPack.id)
         }
         recyclerView.adapter = packAdapter
 
-        // 5. Configuração da NavBar
+        // 5. NavBar configuration
         navBar.setAbaAtiva(CustomNavBarView.Aba.BUY)
         navBar.onAbaSelectedListener = { aba ->
             when (aba) {
@@ -104,12 +100,11 @@ class BuyActivity : AppCompatActivity() {
             }
         }
 
-        // 6. Chamando a nova API de packs ativos
         fetchPacks()
     }
 
     private fun fetchPacks() {
-        tvPage.text = "Carregando packs..."
+        tvPage.text = "Loading packs..."
         tvPage.visibility = View.VISIBLE
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -119,38 +114,37 @@ class BuyActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val packResponse = response.body()!!
-                        val listaPacks = packResponse.packs ?: emptyList()
-                        packAdapter.updateData(listaPacks)
-                        tvPage.text = "Packs Disponíveis (${listaPacks.size})"
+                        val packList = packResponse.packs ?: emptyList()
+                        packAdapter.updateData(packList)
+                        tvPage.text = "Available Packs (${packList.size})"
                     } else {
-                        Log.e("ERRO_API_PACKS", "Código do Erro: ${response.code()} - ${response.message()}")
-                        Toast.makeText(this@BuyActivity, "Erro ao carregar packs", Toast.LENGTH_SHORT).show()
-                        tvPage.text = "Falha ao carregar"
+                        Log.e("API_PACKS_ERROR", "Error Code: ${response.code()} - ${response.message()}")
+                        Toast.makeText(this@BuyActivity, "Error loading packs", Toast.LENGTH_SHORT).show()
+                        tvPage.text = "Failed to load"
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e("API_ERROR", "Erro: ${e.message}")
-                    Toast.makeText(this@BuyActivity, "Falha na conexão", Toast.LENGTH_SHORT).show()
-                    tvPage.text = "Erro de conexão"
+                    Log.e("API_ERROR", "Error: ${e.message}")
+                    Toast.makeText(this@BuyActivity, "Connection failed", Toast.LENGTH_SHORT).show()
+                    tvPage.text = "Connection error"
                 }
             }
         }
     }
 
-    // Função que aciona a rota de compra no backend
-    private fun realizarCompraPack(packId: Int) {
+    private fun buyPackAction(packId: Int) {
         val userId = TokenManager.getUserId(this)
         if (userId == -1) {
-            Toast.makeText(this, "Erro: Usuário não logado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error: User not logged in", Toast.LENGTH_SHORT).show()
             return
         }
 
-        Toast.makeText(this, "Processando compra...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Processing purchase...", Toast.LENGTH_SHORT).show()
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Chama a rota /comprar-pack/{id_user}/{id_pack}
+                // Calls the route /comprar-pack/{id_user}/{id_pack}
                 val response = RetrofitClient.getInstance(this@BuyActivity).buyPack(userId, packId)
 
                 withContext(Dispatchers.Main) {
@@ -158,33 +152,28 @@ class BuyActivity : AppCompatActivity() {
                         val element = response.body()!!
 
                         if (element.isJsonArray) {
-                            // Sucesso! O backend retornou a lista de heróis sorteados.
-                            // Como 'element' já é o array JSON, transformamos ele em String diretamente:
                             val heroesJson = element.toString()
 
-                            // Atualiza também as moedas no topo da tela após a compra
                             findViewById<CoinView>(R.id.coin_view).loadCoins(userId)
 
-                            // Abre a tela de recompensa passando a string JSON
                             val intent = Intent(this@BuyActivity, PackRewardActivity::class.java).apply {
                                 putExtra("WON_HEROES_JSON", heroesJson)
                             }
                             startActivity(intent)
 
                         } else if (element.isJsonObject) {
-                            // Caso retorne a mensagem de erro (ex: moedas insuficientes)
                             val jsonObject = element.asJsonObject
-                            val message = jsonObject.get("message")?.asString ?: "Erro na compra"
+                            val message = jsonObject.get("message")?.asString ?: "Purchase error"
                             Toast.makeText(this@BuyActivity, message, Toast.LENGTH_LONG).show()
                             Log.d("APP_ERROR", message)
                         }
                     } else {
-                        Toast.makeText(this@BuyActivity, "Erro ao realizar a compra", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@BuyActivity, "Error completing purchase", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@BuyActivity, "Falha na conexão: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@BuyActivity, "Connection failed: ${e.message}", Toast.LENGTH_SHORT).show()
                     Log.d("APP_ERROR", "${e.message}")
                 }
             }

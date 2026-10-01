@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.nexusappxml.R
-import com.example.nexusappxml.data.network.RetrofitClient // Ajuste o import se necessário
+import com.example.nexusappxml.data.network.RetrofitClient // Adjust import if necessary
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,44 +20,40 @@ class CoinView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    // 1. Declarar os elementos fora do init para serem acessíveis em toda a classe
     private val txtCoins: TextView
 
-    // Criar um escopo de corrotina específico para rodar a chamada de rede
     private val viewScope = CoroutineScope(Dispatchers.Main)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_coins, this, true)
 
-        // Mapeando os elementos do XML
+        // Mapping XML elements
         txtCoins = findViewById(R.id.txtCoins)
     }
 
-    fun loadCoins(idDoUsuario: Int) {
+    fun loadCoins(userId: Int) {
 
         viewScope.launch {
             try {
-                // Instancia o Retrofit passando o contexto da própria View
                 val apiService = RetrofitClient.getInstance(context)
 
-                // Joga a requisição para uma thread de background (IO)
+                // Switches the request to a background thread (IO)
                 val response = withContext(Dispatchers.IO) {
-                    apiService.getUserDetails(idDoUsuario)
+                    apiService.getUserDetails(userId)
                 }
 
                 if (response.isSuccessful) {
                     val user = response.body()
                     if (user != null) {
-                        // Sucesso: Atualiza o texto na tela com os dados do FastAPI
                         txtCoins.text = "${user.coins}"
                     }
                 } else {
-                    Log.e("API_PREVIEW", "=API Error: ${response.code()}")
+                    Log.e("API_PREVIEW", "API Error: ${response.code()}")
                     txtCoins.text = "Error"
                 }
             } catch (e: Exception) {
-                Log.e("API_PREVIEW", "Conection Error", e)
-                txtCoins.text = "Desc."
+                Log.e("API_PREVIEW", "Connection Error", e)
+                txtCoins.text = "N/A"
             }
         }
     }

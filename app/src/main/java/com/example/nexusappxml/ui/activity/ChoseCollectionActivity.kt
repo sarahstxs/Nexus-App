@@ -29,10 +29,8 @@ class ChoseCollectionActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
 
-        // Esconde a barra de navegação
         controller.hide(WindowInsetsCompat.Type.navigationBars())
 
-        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         var imgBackground = findViewById<ImageView>(R.id.imgBackground)
@@ -73,7 +71,7 @@ class ChoseCollectionActivity : AppCompatActivity() {
                 CustomNavBarView.Aba.BUY -> {
                     Log.d("RETURN", "Buy button")
                     val intent = Intent(this, BuyActivity::class.java).apply {
-                        // Combina as flags corretamente usando 'or'
+                        // Correctly combine flags using 'or'
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK or
                                 Intent.FLAG_ACTIVITY_NO_ANIMATION
@@ -83,7 +81,7 @@ class ChoseCollectionActivity : AppCompatActivity() {
                 CustomNavBarView.Aba.PODIUM -> {
                     Log.d("RETURN", "Podium button")
                     val intent = Intent(this, PodiumActivity::class.java).apply {
-                        // Combina as flags corretamente usando 'or'
+                        // Correctly combine flags using 'or'
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK or
                                 Intent.FLAG_ACTIVITY_NO_ANIMATION
@@ -96,10 +94,9 @@ class ChoseCollectionActivity : AppCompatActivity() {
                 }
                 else -> {}
             }
+        }
     }
 
-
-    }
     fun goToMyCollection() {
         val intent = Intent(this, MyCollectionActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -115,6 +112,7 @@ class ChoseCollectionActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
     fun goToComingSoon() {
         Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
     }

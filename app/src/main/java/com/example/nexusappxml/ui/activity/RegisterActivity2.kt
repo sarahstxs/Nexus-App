@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -37,39 +36,38 @@ class RegisterActivity2 : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
 
-        // Esconde a barra de navegação
+        // Hides the navigation bar
         controller.hide(WindowInsetsCompat.Type.navigationBars())
 
-        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
-        var imgBackground = findViewById<ImageView>(R.id.imgBackground)
+        val imgBackground = findViewById<ImageView>(R.id.imgBackground)
 
         Glide.with(this)
             .load("https://i.pinimg.com/736x/a7/2a/02/a72a022f37c47d8d294e85577737f362.jpg")
             .centerCrop()
             .into(imgBackground)
 
-        // Botão para a tela de login
+        // Button for the login screen
         val goToLogin = findViewById<Button>(R.id.btnGoToLogin)
-        goToLogin.setOnClickListener { GotoLogin() }
+        goToLogin.setOnClickListener { gotoLogin() }
 
-        // Botão de cadastro
-        val registerUSer = findViewById<TextView>(R.id.btnRegister)
-        registerUSer.setOnClickListener {  RegisterUser()}
+        // Register button
+        val registerUser = findViewById<TextView>(R.id.btnRegister)
+        registerUser.setOnClickListener { registerUser() }
     }
 
-    fun GotoLogin() {
+    private fun gotoLogin() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
-    fun RegisterUser() {
+    private fun registerUser() {
 
         // Email
         val formEmail = findViewById<EditText>(R.id.formEmail)
         val txtEmail = formEmail.text.toString()
-        // password
+        // Password
         val formPassword = findViewById<EditText>(R.id.formPassword)
         val txtPassword = formPassword.text.toString()
         // Username
@@ -99,7 +97,7 @@ class RegisterActivity2 : AppCompatActivity() {
                     val successMsg = response.body()?.message
                     Log.d("API_REGISTER", "success $successMsg")
                     Toast.makeText(this@RegisterActivity2, "Registration successful!", Toast.LENGTH_SHORT).show()
-                    GotoLogin()
+                    gotoLogin()
                 }
                 else {
                     val errorJson = response.errorBody()?.string()
@@ -115,8 +113,8 @@ class RegisterActivity2 : AppCompatActivity() {
                     txtError.visibility = View.VISIBLE
                 }
             }
-            catch (e: Exception){
-                Log.e("API_REGISTER", "Connection error")
+            catch (e: Exception) {
+                Log.e("API_REGISTER", "Connection error: ${e.message}")
             }
         }
     }

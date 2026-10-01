@@ -17,7 +17,6 @@ class ItemAlbumView @JvmOverloads constructor(
     private val imgHero: ImageView
 
     init {
-        // CORREÇÃO: Altere de view_deck_preview para item_album (que é o layout correto da grid de heróis)
         LayoutInflater.from(context).inflate(R.layout.item_album, this, true)
 
         layoutParams = MarginLayoutParams(

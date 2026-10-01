@@ -10,14 +10,12 @@ import android.widget.TextView
 import com.example.nexusappxml.R
 import android.content.res.ColorStateList
 
-
 class CustomNavBarView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    // Criando o Enum para as abas (agora como 'enum class')
     enum class Aba {
         BUY,
         COLLECTION,
@@ -47,7 +45,7 @@ class CustomNavBarView @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.view_custom_nav_bar, this, true)
 
-        // Mapeando os elementos do XML
+        // Mapping XML elements
         btnBuy = findViewById(R.id.btn_buy)
         btnBuyContainer = findViewById(R.id.btn_buy_container)
         iconBuy = findViewById(R.id.icon_buy)
@@ -60,8 +58,6 @@ class CustomNavBarView @JvmOverloads constructor(
         btnBattleContainer = findViewById(R.id.btn_battle_container)
         iconBattle = findViewById(R.id.icon_battle)
 
-
-
         btnPodium = findViewById(R.id.btn_podium)
         btnPodiumContainer = findViewById(R.id.btn_podium_container)
         iconPodium = findViewById(R.id.icon_podium)
@@ -71,10 +67,9 @@ class CustomNavBarView @JvmOverloads constructor(
     }
 
     fun setAbaAtiva(abaAtual: Aba) {
-        // Reseta todos para a cor inativa
+        // Resets all to inactive color
         val inactiveColor = Color.parseColor("#FFFFFF")
 
-        // O "?." já faz a checagem de nulo por baixo dos panos (igual ao seu if != null no Java)
         btnBattle?.setTextColor(inactiveColor)
         btnCollection?.setTextColor(inactiveColor)
         btnBuy?.setTextColor(inactiveColor)
@@ -82,27 +77,27 @@ class CustomNavBarView @JvmOverloads constructor(
         btnWho?.setTextColor(inactiveColor)
 
         btnBuyContainer?.setOnClickListener {
-            // Invoca o listener passando a aba correspondente
+            // Invokes the listener passing the corresponding tab
             onAbaSelectedListener?.invoke(Aba.BUY)
         }
         btnCollectionContainer?.setOnClickListener {
-            // Invoca o listener passando a aba correspondente
+            // Invokes the listener passing the corresponding tab
             onAbaSelectedListener?.invoke(Aba.COLLECTION)
         }
         btnBattleContainer?.setOnClickListener {
-            // Invoca o listener passando a aba correspondente
+            // Invokes the listener passing the corresponding tab
             onAbaSelectedListener?.invoke(Aba.BATTLE)
         }
         btnPodiumContainer?.setOnClickListener {
-            // Invoca o listener passando a aba correspondente
+            // Invokes the listener passing the corresponding tab
             onAbaSelectedListener?.invoke(Aba.PODIUM)
         }
         btnWhoContainer?.setOnClickListener {
-            // Invoca o listener passando a aba correspondente
+            // Invokes the listener passing the corresponding tab
             onAbaSelectedListener?.invoke(Aba.WHO)
         }
 
-        // Destaca apenas a aba atual
+        // Highlights only the current tab
         val activeColor = Color.parseColor("#ee9b00")
 
         when (abaAtual) {
@@ -119,7 +114,8 @@ class CustomNavBarView @JvmOverloads constructor(
                 iconCollection?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
             }
-            Aba.BUY -> {btnBuy?.setTextColor(activeColor)
+            Aba.BUY -> {
+                btnBuy?.setTextColor(activeColor)
                 iconBuy?.imageTintList = ColorStateList.valueOf(activeColor)
 
                 btnBattle?.setTextColor(inactiveColor)
@@ -131,7 +127,8 @@ class CustomNavBarView @JvmOverloads constructor(
                 iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
             }
-            Aba.COLLECTION -> {btnCollection?.setTextColor(activeColor)
+            Aba.COLLECTION -> {
+                btnCollection?.setTextColor(activeColor)
                 iconCollection?.imageTintList = ColorStateList.valueOf(activeColor)
 
                 btnBattle?.setTextColor(inactiveColor)
@@ -142,8 +139,9 @@ class CustomNavBarView @JvmOverloads constructor(
                 iconBuy?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconBattle?.imageTintList = ColorStateList.valueOf(inactiveColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(inactiveColor)
-                }
-            Aba.PODIUM -> {btnPodium?.setTextColor(activeColor)
+            }
+            Aba.PODIUM -> {
+                btnPodium?.setTextColor(activeColor)
                 iconPodium?.imageTintList = ColorStateList.valueOf(activeColor)
 
                 btnBattle?.setTextColor(inactiveColor)

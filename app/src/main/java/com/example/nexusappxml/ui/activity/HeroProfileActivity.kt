@@ -32,7 +32,7 @@ class HeroProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_hero_profile)
 
-        selectedHeroId = intent.getIntExtra("HEROI_ID", -1)
+        selectedHeroId = intent.getIntExtra("HERO_ID", -1)
 
         val imgBackground = findViewById<ImageView>(R.id.imgBackground)
 
@@ -83,7 +83,6 @@ class HeroProfileActivity : AppCompatActivity() {
                                 else -> "Invalid"
                             }
 
-                            // MAPPING ALL VIEWS
                             val heroProfileImg = findViewById<ImageHeroProfileView>(R.id.componenteImgHero)
                             val txtHeroName = findViewById<TextView>(R.id.txtHeroName)
                             val txtRealName = findViewById<TextView>(R.id.txtRealName)
@@ -91,7 +90,6 @@ class HeroProfileActivity : AppCompatActivity() {
                             val viewHave = findViewById<View>(R.id.viewHave)
 
                             val txtRarity = findViewById<TextView>(R.id.txtRarity)
-//                            val txtOrigin = findViewById<TextView>(R.id.txtOrigin)
                             val txtLevel = findViewById<TextView>(R.id.txtLevel)
                             val txtBirth = findViewById<TextView>(R.id.txtBirth)
                             val txtAppearance = findViewById<TextView>(R.id.txtAppearance)
@@ -104,16 +102,12 @@ class HeroProfileActivity : AppCompatActivity() {
                             val txtLife = findViewById<TextView>(R.id.txtLife)
                             val txtDefense = findViewById<TextView>(R.id.txtDefense)
 
-                            // ==========================================
-                            // POPULATING DATA WITH HTML FORMATTING
-                            // ==========================================
                             heroProfileImg.bind(baseHero.imageHero ?: "")
 
                             txtHeroName.text = "${baseHero.name}"
                             txtRealName.text = baseHero.realName ?: "Unknown Identity"
 
-
-                            txtHave.setTextColor(Color.parseColor("#FFFFFF")) // Espaço extra removido aqui
+                            txtHave.setTextColor(Color.parseColor("#FFFFFF"))
 
                             if (isOwned) {
                                 txtHave.text = "Obtained"
@@ -123,37 +117,35 @@ class HeroProfileActivity : AppCompatActivity() {
                                 viewHave.setBackgroundColor(Color.parseColor("#D32F2F"))
                             }
 
-                            // Variável com a cor vermelha para facilitar caso queira mudar depois
                             val c = "#FFFFFF"
                             val a = "#ee9b00"
                             val rarityColor = when (rarityName.lowercase()) {
-                                "common" -> "#B0BEC5"       // Cinza claro / Prateado (Limpo e neutro)
-                                "uncommon" -> "#81C784"     // Verde claro (Fácil de ver)
-                                "rare" -> "#64B5F6"         // Azul claro brilhante
-                                "epic" -> "#CE93D8"         // Roxo claro / Lavanda vibrante
-                                "legendary" -> "#FFD54F"    // Amarelo / Dourado solar
-                                "mythic" -> "#FF5252"       // Vermelho / Coral vivo (Destaque máximo)
-                                else -> "#EF5350"           // Vermelho padrão claro (caso venha algo desconhecido)
+                                "common" -> "#B0BEC5"       // Light gray / Silver
+                                "uncommon" -> "#81C784"     // Light green
+                                "rare" -> "#64B5F6"         // Bright light blue
+                                "epic" -> "#CE93D8"         // Light purple / Vibrant lavender
+                                "legendary" -> "#FFD54F"    // Solar yellow / Gold
+                                "mythic" -> "#FF5252"       // Vibrant coral red
+                                else -> "#EF5350"           // Default light red
                             }
 
-                            Log.d("TESTE", "${baseHero}")
+                            Log.d("TEST", "${baseHero}")
 
-                            // Base Details (Label em negrito e vermelho, Valor normal e preto)'
+                            // Base Details
                             txtRarity.text = HtmlCompat.fromHtml("<font color='$rarityColor'> ${rarityName} </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtLevel.text = HtmlCompat.fromHtml("<b><font color='$a'>Level<br></font></b> $level", HtmlCompat.FROM_HTML_MODE_LEGACY)
-//                            txtOrigin.text = HtmlCompat.fromHtml("<b><font color='$a'>Origin:</font></b> ${baseHero.origin ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtBirth.text = HtmlCompat.fromHtml("<b><font color='$a'>Birth:</font></b> ${baseHero.birth ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtAppearance.text = HtmlCompat.fromHtml("<b><font color='$a'>Appearances:</font></b> ${baseHero.appearance ?: "Unknown"} times", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtFirstAppearanceComic.text = HtmlCompat.fromHtml("<b><font color='$a'>First comic:</font></b> ${baseHero.firstAppearanceComic ?: "Unknown"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtGender.text = HtmlCompat.fromHtml(
-                                "<b><font color='$a'>Gender:</font></b> ${if (baseHero.gender == 1) "Men" else "Woman"}",
+                                "<b><font color='$a'>Gender:</font></b> ${if (baseHero.gender == 1) "Male" else "Female"}",
                                 HtmlCompat.FROM_HTML_MODE_LEGACY
                             )
                             txtDeck.text = HtmlCompat.fromHtml("<b><font color='$a'>Deck:</font></b> ${baseHero.deck ?: "None"}", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                             // Attributes
                             txtFragments.text = HtmlCompat.fromHtml("<b><font color='$a'>Fragments<br></font></b> $fragments", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                            txtAttack.text = HtmlCompat.fromHtml("<b> ${baseHero.baseAtk}<br></b><font color='$a'> Ataque</font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            txtAttack.text = HtmlCompat.fromHtml("<b> ${baseHero.baseAtk}<br></b><font color='$a'> Attack</font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtLife.text = HtmlCompat.fromHtml("<b>${currentHp}<br></b><font color='$a'>Life </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                             txtDefense.text = HtmlCompat.fromHtml("<b>${baseHero.baseDef}<br></b><font color='$a'>Defense </font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
 

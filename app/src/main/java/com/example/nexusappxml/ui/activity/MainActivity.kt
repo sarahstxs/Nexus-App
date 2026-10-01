@@ -3,7 +3,6 @@ package com.example.nexusappxml.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -26,51 +25,44 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Verifica se já tem um token salvo antes de carregar a tela
         val tokenSaved = TokenManager.getToken(this)
 
-
-
-        // Se o token existe, vai direto pra home
         if (!tokenSaved.isNullOrEmpty()) {
-            GotoInitialPage()
+            gotoInitialPage()
             return
         }
 
-        // Se não tem token, carrega a tela de login
         setContentView(R.layout.activity_main)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
 
-        // Esconde a barra de navegação
         controller.hide(WindowInsetsCompat.Type.navigationBars())
 
-        // Faz com que a barra apareça apenas se o usuário arrastar de baixo para cima, e depois suma de novo
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
-        var imgBackground = findViewById<ImageView>(R.id.imgBackground)
+        val imgBackground = findViewById<ImageView>(R.id.imgBackground)
 
         Glide.with(this)
             .load("https://i.pinimg.com/736x/a7/2a/02/a72a022f37c47d8d294e85577737f362.jpg")
             .centerCrop()
             .into(imgBackground)
 
-
-        // Botão para tela de registro
+        // Button for the registration screen
         val goToRegister = findViewById<Button>(R.id.buttonResgister)
-        goToRegister.setOnClickListener { GotoRegister() }
+        goToRegister.setOnClickListener { gotoRegister() }
 
-        // Botão para logar
+        // Login button
         val btnLogin = findViewById<TextView>(R.id.btnLogin)
-        btnLogin.setOnClickListener { Enter() }
+        btnLogin.setOnClickListener { enter() }
     }
-    fun GotoRegister(){
+
+    private fun gotoRegister() {
         val intent = Intent(this, RegisterActivity2::class.java)
         startActivity(intent)
-
     }
-    fun Enter() {
+
+    private fun enter() {
         val apiService = RetrofitClient.getInstance(this)
 
         lifecycleScope.launch {
@@ -83,34 +75,33 @@ class MainActivity : AppCompatActivity() {
                     password = formPassword.text.toString()
                 )
 
-                val awser = apiService.login(loginDetails)
+                val answer = apiService.login(loginDetails)
 
-                Log.d("TESTE_TOKEN", "Token recebido: ${awser.accessToken}")
+                Log.d("TOKEN_TEST", "Token received: ${answer.accessToken}")
 
-                // Salva o token
-                TokenManager.saveToken(this@MainActivity, awser.accessToken)
+                // Saves the token
+                TokenManager.saveToken(this@MainActivity, answer.accessToken)
 
-                // Salva o ID corretamente
-                TokenManager.saveUserId(this@MainActivity, awser.userId)
+                // Saves the ID correctly
+                TokenManager.saveUserId(this@MainActivity, answer.userId)
 
-                GotoInitialPage()
+                gotoInitialPage()
 
             } catch (e: retrofit2.HttpException) {
                 Toast.makeText(this@MainActivity, "Incorrect Credentials!", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Log.d("API_REGISTER", "$e")
+                Log.d("API_LOGIN", "$e")
                 Toast.makeText(this@MainActivity, "Connection Error!", Toast.LENGTH_SHORT).show()
             }
         }
     }
-    fun GotoInitialPage() {
+
+    private fun gotoInitialPage() {
         val intent = Intent(this, InitialActivity::class.java)
 
-        // Limpa o histórico de telas. O usuário não consegue voltar para o Login apertando "Voltar"
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         startActivity(intent)
         finish()
     }
-
 }

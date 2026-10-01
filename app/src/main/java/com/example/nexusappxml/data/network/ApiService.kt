@@ -23,7 +23,6 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-// Modelo de dados que recebe a resposta do token do FastAPI
 data class TokenResponse(
     @SerializedName("access_token") val accessToken: String,
     @SerializedName("token_type") val tokenType: String,
@@ -31,7 +30,7 @@ data class TokenResponse(
 )
 
 interface ApiService {
-    @POST("/users/login") // Rota exata na FastAPI
+    @POST("/users/login")
     suspend fun login(
         @Body request: LoginRequest
     ): TokenResponse
@@ -46,30 +45,28 @@ interface ApiService {
         @Path("id_user") id: Int
     ): Response<UserResponse>
 
-    @GET("/heroes/list-all-heroes") // Confirme se a rota no Python é exatamente esta
+    @GET("/heroes/list-all-heroes")
     suspend fun getHeroes(
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): Response<HeroResponse>
 
-    @GET("/user-heroes/list-all-user-heroes") // Confirme se a rota no Python é exatamente esta
+    @GET("/user-heroes/list-all-user-heroes")
     suspend fun getUserHeroes(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("id_user") id_user: Int
     ): Response<HeroResponse>
 
-        // Aqui você coloca SÓ a rota base. O Retrofit monta os ? e & sozinho!
     @GET("/heroes/list-complete-user-hero/{id_hero}/{id_user}")
     suspend fun getHeroComplete(
             @Path("id_hero") heroId: Int,
             @Path("id_user") userId: Int
     ): Response<HeroCompleteResponse>
 
-    @GET("/packs/list-active") // Ajuste o caminho caso tenha um prefixo como "pack/list-active"
+    @GET("/packs/list-active")
     suspend fun getActivePacks(): Response<PackResponse>
 
-    // Nova rota para comprar o pack
     @GET("/users/comprar-pack/{id_user}/{id_pack}")
     suspend fun buyPack(
         @Path("id_user") userId: Int,
@@ -92,7 +89,6 @@ interface ApiService {
         @Query("id_hero6") h6: Int
     ): Response<JsonElement>
 
-    // Dentro da sua interface ApiService:
     @POST("/battles/start")
     suspend fun startBattle(
         @Query("floor") floor: Int,

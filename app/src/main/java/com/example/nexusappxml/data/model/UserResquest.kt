@@ -44,5 +44,4 @@ data class UserResponse(
     val email: String,
     val coins: Int,
     val current_level: Int
-    // Adicione os outros campos que o seu 'listUSer' retorna do banco
 )

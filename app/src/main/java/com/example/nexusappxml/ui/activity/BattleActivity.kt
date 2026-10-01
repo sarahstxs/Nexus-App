@@ -26,7 +26,7 @@ class BattleActivity : AppCompatActivity() {
         val txtPowerInfo = findViewById<TextView>(R.id.txtPowerInfo)
         val btnBack = findViewById<Button>(R.id.btnBackToMenu)
 
-        // Inicializa os 6 ImageViews da equipa em batalha
+        // Initialize the 6 battle team ImageViews
         battleHeroImageViews = listOf(
             findViewById(R.id.imgBattleHero1),
             findViewById(R.id.imgBattleHero2),
@@ -42,12 +42,12 @@ class BattleActivity : AppCompatActivity() {
         val placeId = intent.getIntExtra("EXTRA_PLACE_ID", 1)
 
         if (heroIds.size != 6) {
-            Toast.makeText(this, "Deck incompleto!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Incomplete deck!", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
-        // Carrega visualmente os 6 heróis escolhidos no ecrã de batalha
+        // Visually load the 6 chosen heroes on the battle screen
         for (i in battleHeroImageViews.indices) {
             if (i < heroImages.size && !heroImages[i].isNullOrEmpty()) {
                 Glide.with(this)
@@ -74,7 +74,7 @@ class BattleActivity : AppCompatActivity() {
                     val status = data.status
                     val message = data.message
 
-                    // Carrega o fundo dinâmico do Place com o Glide
+                    // Load the Place dynamic background using Glide
                     if (bgImage.isNotEmpty()) {
                         Glide.with(this@BattleActivity)
                             .load(bgImage)
@@ -82,8 +82,8 @@ class BattleActivity : AppCompatActivity() {
                             .into(imgBackground)
                     }
 
-                    // Mostra os poderes e o resultado na tela
-                    txtPowerInfo.text = "Poder da Equipa: $playerPower  VS  Inimigo: $enemyPower"
+                    // Display powers and result on screen
+                    txtPowerInfo.text = "Team Power: $playerPower  VS  Enemy Power: $enemyPower"
                     txtResult.text = message
 
                     if (status == "victory") {
@@ -92,13 +92,13 @@ class BattleActivity : AppCompatActivity() {
                         txtResult.setTextColor(android.graphics.Color.RED)
                     }
                 } else {
-                    val errorBody = response.errorBody()?.string() ?: "Erro desconhecido"
-                    Log.e("BattleActivity", "Erro do Servidor: $errorBody")
-                    Toast.makeText(this@BattleActivity, "Erro: $errorBody", Toast.LENGTH_LONG).show()
+                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                    Log.e("BattleActivity", "Server Error: $errorBody")
+                    Toast.makeText(this@BattleActivity, "Error: $errorBody", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
-                Log.e("BattleActivity", "Erro de ligação: ${e.message}", e)
-                Toast.makeText(this@BattleActivity, "Erro de ligação", Toast.LENGTH_SHORT).show()
+                Log.e("BattleActivity", "Connection error: ${e.message}", e)
+                Toast.makeText(this@BattleActivity, "Connection error", Toast.LENGTH_SHORT).show()
             }
         }
 

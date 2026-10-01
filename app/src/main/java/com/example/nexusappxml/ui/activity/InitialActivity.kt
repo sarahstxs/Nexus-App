@@ -28,11 +28,9 @@ class InitialActivity : AppCompatActivity() {
 
     private lateinit var heroImageViews: List<ImageView>
 
-    // Lista local que representa os 6 espaços do deck (null = espaço vazio)
     private val deckHeroes = MutableList<HeroItemResponse?>(6) { null }
     private var selectedSlotIndex: Int = -1
 
-    // Recebe o ID e a URL da imagem da MyCollectionActivity quando um herói é selecionado
     private val selectHeroLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -42,17 +40,14 @@ class InitialActivity : AppCompatActivity() {
 
             if (heroId != -1 && selectedSlotIndex in 0..5) {
 
-                // VALIDAÇÃO: Impede adicionar um herói que já está presente em outro slot do deck
                 val heroAlreadyInDeck = deckHeroes.any { it?.id == heroId }
 
                 if (heroAlreadyInDeck) {
                     Toast.makeText(this, "Você não pode colocar um herói repetido no deck!", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Adiciona normalmente se não for repetido
                     deckHeroes[selectedSlotIndex] = HeroItemResponse(id = heroId, name = null, imageUrl = heroImageUrl)
                     updateDeckUI()
 
-                    // Guarda automaticamente no backend se todos os 6 espaços estiverem preenchidos
                     saveDeckToBackend()
                 }
             }
@@ -82,7 +77,6 @@ class InitialActivity : AppCompatActivity() {
         val btnGoBattle = findViewById<GoBattleButton>(R.id.btn_go_battle)
         val btnCurrentLevel = findViewById<TextView>(R.id.currentLevel)
 
-        // Inicializa os 6 ImageViews dos heróis do deck correspondentes ao XML atualizado
         heroImageViews = listOf(
             findViewById(R.id.imgHero1),
             findViewById(R.id.imgHero2),
@@ -94,17 +88,14 @@ class InitialActivity : AppCompatActivity() {
 
         val userIdReal = TokenManager.getUserId(this)
 
-        perfilPreview.loadDatas(idDoUsuario = userIdReal) {
-            // Só executa depois que a API responder e o txtLevel.text estiver preenchido
+        perfilPreview.loadDatas(userId = userIdReal) {
             btnCurrentLevel.text = getString(R.string.level_format, perfilPreview.txtLevel.text)
         }
 
-        coinsView.loadCoins(idDoUsuario = userIdReal)
+        coinsView.loadCoins(userId = userIdReal)
 
-        // Carrega os decks do utilizador a partir da API
         loadUserDecks()
 
-        // Configura o clique individual nos espaços de heróis (remover ou adicionar)
         setupHeroSlotClicks()
 
         navBar.setAbaAtiva(CustomNavBarView.Aba.BATTLE)
@@ -135,18 +126,15 @@ class InitialActivity : AppCompatActivity() {
             }
         }
 
-        // Configuração do botão de ir para a batalha com validação do deck completo
         btnGoBattle.setOnClickListener {
             if (deckHeroes.any { it == null }) {
                 Toast.makeText(this, "Precisas de preencher todos os 6 espaços do deck antes de lutar!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Extrai os IDs e as imagens dos 6 heróis do deck atual
             val heroIds = ArrayList(deckHeroes.map { it!!.id })
             val heroImages = ArrayList(deckHeroes.map { it!!.imageUrl ?: "" })
 
-            // Abre a BattleActivity enviando os dados da equipa, imagens, o andar e o local
             val intent = Intent(this, BattleActivity::class.java).apply {
                 putIntegerArrayListExtra("EXTRA_DECK_HERO_IDS", heroIds)
                 putStringArrayListExtra("EXTRA_DECK_HERO_IMAGES", heroImages)
@@ -163,12 +151,10 @@ class InitialActivity : AppCompatActivity() {
         for (i in heroImageViews.indices) {
             heroImageViews[i].setOnClickListener {
                 if (deckHeroes[i] != null) {
-                    // ESPAÇO PREENCHIDO: Clicar remove o herói do deck localmente
                     deckHeroes[i] = null
                     updateDeckUI()
                     Toast.makeText(this, "Herói removido do deck", Toast.LENGTH_SHORT).show()
                 } else {
-                    // ESPAÇO VAZIO: Abre a coleção em modo de seleção
                     selectedSlotIndex = i
                     val intent = Intent(this, MyCollectionActivity::class.java).apply {
                         putExtra("SELECT_MODE", true)
@@ -205,7 +191,6 @@ class InitialActivity : AppCompatActivity() {
     }
 
     private fun saveDeckToBackend() {
-        // Apenas guarda se os 6 espaços estiverem completamente preenchidos
         if (deckHeroes.any { it == null }) return
 
         val h1 = deckHeroes[0]?.id ?: return

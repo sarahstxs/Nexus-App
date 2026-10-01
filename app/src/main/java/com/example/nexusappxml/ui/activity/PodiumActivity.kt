@@ -37,14 +37,13 @@ class PodiumActivity : AppCompatActivity() {
             .centerCrop()
             .into(imgBackground)
 
-        // Configura o RecyclerView como lista vertical de faixas
+        // Sets up the RecyclerView as a vertical list of entries
         recyclerView.layoutManager = LinearLayoutManager(this)
         rankAdapter = RankAdapter(emptyList())
         recyclerView.adapter = rankAdapter
 
         navBar.setAbaAtiva(CustomNavBarView.Aba.PODIUM)
 
-        // Configura a ação de clique vinda da barra de navegação
         navBar.onAbaSelectedListener = { aba ->
             when (aba) {
                 CustomNavBarView.Aba.COLLECTION -> {
@@ -72,7 +71,7 @@ class PodiumActivity : AppCompatActivity() {
             }
         }
 
-        // Busca o ranking do servidor
+        // Fetches the server ranking
         fetchRank()
     }
 
@@ -81,7 +80,6 @@ class PodiumActivity : AppCompatActivity() {
             try {
                 val response = RetrofitClient.getInstance(this@PodiumActivity).getRank()
 
-                // LOG PARA DEBUGAR: Mostra o código HTTP e o erro do servidor, se houver
                 val errorCode = response.code()
                 val errorBody = response.errorBody()?.string()
                 Log.d("PodiumDebug", "Code: $errorCode, ErrorBody: $errorBody")
@@ -91,14 +89,13 @@ class PodiumActivity : AppCompatActivity() {
                         val rankResponse = response.body()!!
                         rankAdapter.updateData(rankResponse.ranking ?: emptyList())
                     } else {
-                        // Mostra o código do erro no Toast para facilitar o teste visual
-                        Toast.makeText(this@PodiumActivity, "Erro HTTP: $errorCode", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@PodiumActivity, "HTTP Error: $errorCode", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
-                Log.e("PodiumDebug", "Exceção na requisição", e)
+                Log.e("PodiumDebug", "Request exception", e)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@PodiumActivity, "Falha na conexão: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PodiumActivity, "Connection failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
                 }
             }
         }

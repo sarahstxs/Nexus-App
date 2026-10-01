@@ -19,7 +19,7 @@ class RankAdapter(private var rankList: List<RankUser>) :
         fun bind(user: RankUser) {
             txtPosition.text = "#${user.position}"
             txtUserName.text = user.name
-            txtUserLevel.text = "Nível ${user.level}"
+            txtUserLevel.text = "Level ${user.level}"
         }
     }
 

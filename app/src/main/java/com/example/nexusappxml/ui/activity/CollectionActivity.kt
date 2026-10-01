@@ -26,7 +26,6 @@ import kotlinx.coroutines.withContext
 
 class CollectionActivity : AppCompatActivity() {
 
-    // 1. Declarando as variáveis de paginação e views aqui no topo
     private var currentPage = 1
     private val limitPerPage = 12
     private lateinit var btnPrev: Button
@@ -45,7 +44,6 @@ class CollectionActivity : AppCompatActivity() {
         var imgBackground = findViewById<ImageView>(R.id.imgBackground)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewAlbuns)
 
-        // 2. Vinculando os botões de paginação do XML
         btnPrev = findViewById(R.id.btn_prev_page)
         btnNext = findViewById(R.id.btn_next_page)
         tvPage = findViewById(R.id.tv_page_number)
@@ -60,17 +58,15 @@ class CollectionActivity : AppCompatActivity() {
         perfilPreview.loadDatas(userIdReal)
         coinsView.loadCoins(userIdReal)
 
-        // 3. Configurando o RecyclerView com o Adapter e o Clique!
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        albumAdapter = AlbumAdapter(emptyList()) { idClicado ->
-            // Abre a tela da Ficha do Personagem quando clicar em uma imagem
+        albumAdapter = AlbumAdapter(emptyList()) { clickedId ->
+            // Opens the Hero Profile screen when clicking an image
             val intent = Intent(this@CollectionActivity, HeroProfileActivity::class.java)
-            intent.putExtra("HEROI_ID", idClicado)
+            intent.putExtra("HERO_ID", clickedId)
             startActivity(intent)
         }
         recyclerView.adapter = albumAdapter
 
-        // 4. Configurando os cliques dos botões de página
         btnPrev.setOnClickListener {
             if (currentPage > 1) {
                 currentPage--
@@ -83,7 +79,7 @@ class CollectionActivity : AppCompatActivity() {
             fetchHeroes(currentPage)
         }
 
-        // 5. Configuração da NavBar
+        // 5. NavBar configuration
         navBar.setAbaAtiva(CustomNavBarView.Aba.COLLECTION)
         navBar.onAbaSelectedListener = { aba ->
             when (aba) {
@@ -126,46 +122,43 @@ class CollectionActivity : AppCompatActivity() {
             }
         }
 
-        // 6. Chamando a API pela primeira vez quando a tela abre!
         fetchHeroes(currentPage)
     }
 
     private fun fetchHeroes(page: Int) {
-        tvPage.text = "Carregando..."
+        tvPage.text = "Loading..."
         btnPrev.isEnabled = false
         btnNext.isEnabled = false
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Passa a página atual e o limite (12)
                 val response = RetrofitClient.getInstance(this@CollectionActivity).getHeroes(page = page, limit = limitPerPage)
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val heroResponse = response.body()!!
 
-                        // CORREÇÃO: Usando o operador Elvis para evitar que a variável seja nula
-                        val herois = heroResponse.heroes ?: emptyList()
-                        albumAdapter.updateData(herois)
+                        val heroes = heroResponse.heroes ?: emptyList()
+                        albumAdapter.updateData(heroes)
 
-                        // Atualiza o texto da página
-                        tvPage.text = "Página $page"
+                        // Updates page text
+                        tvPage.text = "Page $page"
 
-                        // Regras dos botões de paginação
+                        // Pagination button rules
                         btnPrev.isEnabled = page > 1
-                        btnNext.isEnabled = herois.size == limitPerPage
+                        btnNext.isEnabled = heroes.size == limitPerPage
                     } else {
-                        Log.e("ERRO_API_HEROIS", "Código do Erro: ${response.code()} - ${response.message()}")
-                        Toast.makeText(this@CollectionActivity, "Erro ao carregar heróis", Toast.LENGTH_SHORT).show()
-                        tvPage.text = "Página $page"
+                        Log.e("API_HEROES_ERROR", "Error Code: ${response.code()} - ${response.message()}")
+                        Toast.makeText(this@CollectionActivity, "Error loading heroes", Toast.LENGTH_SHORT).show()
+                        tvPage.text = "Page $page"
                         btnPrev.isEnabled = page > 1
                         btnNext.isEnabled = true
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e("API_ERROR", "Erro: ${e.message}")
-                    Toast.makeText(this@CollectionActivity, "Falha na conexão", Toast.LENGTH_SHORT).show()
-                    tvPage.text = "Página $page"
+                    Log.e("API_ERROR", "Error: ${e.message}")
+                    Toast.makeText(this@CollectionActivity, "Connection failed", Toast.LENGTH_SHORT).show()
+                    tvPage.text = "Page $page"
                     btnPrev.isEnabled = page > 1
                     btnNext.isEnabled = true
                 }

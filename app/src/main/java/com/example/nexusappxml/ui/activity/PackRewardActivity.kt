@@ -20,11 +20,10 @@ class PackRewardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pack_reward)
 
         val container = findViewById<LinearLayout>(R.id.layoutHeroesContainer)
-        val btnContinuar = findViewById<Button>(R.id.btnColher)
+        val btnContinue = findViewById<Button>(R.id.btnColher)
 
-        // Resgata o JSON enviado pela Intent com os heróis sorteados
         val heroesJson = intent.getStringExtra("WON_HEROES_JSON")
-        Log.d("PACK_REWARD", "JSON recebido: $heroesJson")
+        Log.d("PACK_REWARD", "Received JSON: $heroesJson")
 
         if (!heroesJson.isNullOrEmpty()) {
             try {
@@ -32,7 +31,6 @@ class PackRewardActivity : AppCompatActivity() {
                 val heroes: List<WonHeroRequest>? = Gson().fromJson(heroesJson, listType)
 
                 heroes?.forEachIndexed { index, hero ->
-                    // Infla o novo layout criado especificamente para as recompensas
                     val itemView = layoutInflater.inflate(R.layout.view_reward_hero, container, false).apply {
                         alpha = 0f
                         scaleX = 0.5f
@@ -42,10 +40,9 @@ class PackRewardActivity : AppCompatActivity() {
                     val txtHeroName = itemView.findViewById<TextView>(R.id.txtHeroName)
                     val imgHeroReward = itemView.findViewById<ImageView>(R.id.imgHeroReward)
 
-                    // Define o nome do herói obtido na API
-                    txtHeroName.text = hero.name ?: "Herói Desconhecido"
+                    // Sets the name of the hero obtained from the API
+                    txtHeroName.text = hero.name ?: "Unknown Hero"
 
-                    // Carrega a imagem via Glide com segurança
                     if (!hero.imageUrl.isNullOrEmpty()) {
                         Glide.with(this)
                             .load(hero.imageUrl)
@@ -58,7 +55,6 @@ class PackRewardActivity : AppCompatActivity() {
 
                     container.addView(itemView)
 
-                    // Animação de surgimento em cascata para cada card
                     itemView.animate()
                         .alpha(1f)
                         .scaleX(1f)
@@ -68,12 +64,12 @@ class PackRewardActivity : AppCompatActivity() {
                         .start()
                 }
             } catch (e: Exception) {
-                Log.e("PACK_REWARD", "Erro ao processar JSON dos heróis: ${e.message}")
+                Log.e("PACK_REWARD", "Error processing heroes JSON: ${e.message}")
             }
         }
 
-        btnContinuar.setOnClickListener {
-            finish() // Fecha a tela de recompensa e retorna para a loja
+        btnContinue.setOnClickListener {
+            finish()
         }
     }
 }

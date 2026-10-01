@@ -9,35 +9,26 @@ import com.bumptech.glide.Glide
 import com.example.nexusappxml.R
 
 class ImageHeroProfileView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
-    ) : FrameLayout(context, attrs, defStyleAttr) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
-        private val imgHero: ImageView
+    private val imgHero: ImageView
 
-        init {
-            // Infla o seu XML exato (substitua 'view_deck_preview' pelo nome real do seu arquivo XML se for diferente)
-            LayoutInflater.from(context).inflate(R.layout.view_image_hero_profile, this, true)
+    init {
+        LayoutInflater.from(context).inflate(R.layout.view_image_hero_profile, this, true)
 
-            // Ajusta os parâmetros para que o item caiba bem no RecyclerView / Grid
-//            layoutParams = MarginLayoutParams(
-//                MarginLayoutParams.WRAP_CONTENT,
-//                MarginLayoutParams.WRAP_CONTENT
-//            ).apply {
-//                setMargins(8, 8, 8, 8)
-//            }
 
-            // Encontra o ImageView dentro do seu ConstraintLayout (btnGoDeck)
-            imgHero = findViewById(R.id.imgHero)
-        }
-
-        // Função para carregar a imagem dinamicamente via Glide
-        fun bind(imageUrl: String) {
-            Glide.with(context)
-                .load(imageUrl)
-                .placeholder(R.drawable.shadow_perfil_icon) // Opcional: imagem de carregamento
-                .centerCrop()
-                .into(imgHero)
-        }
+        // Finds the ImageView inside your layout
+        imgHero = findViewById(R.id.imgHero)
     }
+
+    fun bind(imageUrl: String) {
+        Glide.with(context)
+            .load(imageUrl)
+            .placeholder(R.drawable.shadow_perfil_icon) // Optional: loading placeholder image
+            .centerCrop()
+            .into(imgHero)
+    }
+}

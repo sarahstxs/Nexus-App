@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.nexusappxml.R
 
@@ -23,6 +22,6 @@ class GoBattleButton @JvmOverloads constructor(
     }
 
     fun GotoBattle() {
-        txtGoBattle.setOnClickListener {Log.d("RETURN", "Go!!!")}
+        txtGoBattle.setOnClickListener { Log.d("RETURN", "Go!!!") }
     }
 }
